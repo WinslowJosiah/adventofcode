@@ -1,3 +1,12 @@
+# [Project-specific .gitignore stuff]
+
+# .vscode folder
+.vscode
+# Code screenshots (for sharing on social media)
+**/code.png
+
+# [Auto-generated Python .gitignore stuff]
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
