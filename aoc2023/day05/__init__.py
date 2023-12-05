@@ -22,7 +22,7 @@ def aoc2023_day05_part1(lines: Iterable[str]) -> int:
     # Extract seed IDs from first line
     seeds_line = next(line_iter)
     _, seeds_str = seeds_line.split(": ")
-    category_ids = [int(seed_str) for seed_str in seeds_str.split()]
+    category_ids = list(map(int, seeds_str.split()))
     # Skip next blank line
     assert not next(line_iter)
 
@@ -46,7 +46,7 @@ def aoc2023_day05_part1(lines: Iterable[str]) -> int:
             if not line:
                 break
             # Extract numbers from mapping line
-            dest, src, range_len = (int(n) for n in line.split())
+            dest, src, range_len = map(int, line.split())
             # Store relevant range information
             mappings[(src, src + range_len)] = dest - src
 
@@ -120,7 +120,7 @@ def aoc2023_day05_part2(lines: Iterable[str]) -> int:
     seeds_line = next(line_iter)
     _, seeds_str = seeds_line.split(": ")
 
-    seed_numbers = [int(seed_str) for seed_str in seeds_str.split()]
+    seed_numbers = map(int, seeds_str.split())
     # The way we calculate the category IDs is different now.
     # 1. We must step through the seed numbers two at a time, and use
     # the ranges of category IDs defined by those pairs.
@@ -149,7 +149,7 @@ def aoc2023_day05_part2(lines: Iterable[str]) -> int:
             if not line:
                 break
             # Extract numbers from mapping line
-            dest, src, range_len = (int(n) for n in line.split())
+            dest, src, range_len = map(int, line.split())
             # Store relevant range information
             mappings[(src, src + range_len)] = dest - src
 
