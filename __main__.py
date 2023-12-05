@@ -55,7 +55,7 @@ def nanoseconds_str(ns: int | float) -> str:
     return f"{ns / 1e9:.3f} s"
 
 
-def main(year: int, day: int):
+def main(year: int, day: int, benchmark: bool, input_paths: list[str] | None):
     module_path = FILE_PATH.joinpath(f"aoc{year}").joinpath(f"day{day:0>2}")
 
     # Import parts tuple from the module for this year/day
@@ -75,12 +75,26 @@ def main(year: int, day: int):
         print("error: could not find code!")
         return
 
-    # Look for all .txt files stored near the code
+    paths_to_check: Iterable[pathlib.Path]
+    # If input paths were provided
+    if input_paths is not None:
+        # We will check the provided paths
+        paths_to_check = []
+        for p in input_paths:
+            path_to_check = pathlib.Path(p)
+            paths_to_check.append(
+                path_to_check
+                if path_to_check.is_absolute()
+                else module_path.joinpath(path_to_check)
+            )
+    else:
+        # Otherwise, we will check all .txt files stored near the code
+        paths_to_check = module_path.glob("**/*.txt")
+
+    # Look for files to use as input
     file_paths = sorted(
         file_path
-        for file_path in module_path.glob("**/*.txt")
-        # NOTE: Sometimes paths ending in .txt are folders.
-        # Don't ask me why.
+        for file_path in paths_to_check
         if file_path.is_file()
     )
     if not file_paths:
@@ -89,7 +103,11 @@ def main(year: int, day: int):
 
     # The .txt files will each be used as inputs
     for file_path in file_paths:
-        print("Input file:", file_path.relative_to(module_path))
+        try:
+            pretty_file_path = file_path.relative_to(module_path)
+        except ValueError:
+            pretty_file_path = file_path
+        print("Input file:", pretty_file_path)
 
         print()
         print("Return values")
@@ -110,6 +128,10 @@ def main(year: int, day: int):
                 print(return_value)
 
         print()
+        # Skip benchmarking if not benchmarking
+        if not benchmark:
+            continue
+
         print(f"Time for {NUMBER_OF_RUNS} runs")
         # Run both parts many times, and time them with timeit
         for part in parts:
@@ -148,12 +170,23 @@ if __name__ == "__main__":
         description="Run Josiah Winslow's Advent of Code solutions.",
     )
     parser.add_argument(
-        "--year", "-y", help="year number", metavar="YYYY",
+        "-y", "--year", help="year number", metavar="YYYY",
         type=int, required=True,
     )
     parser.add_argument(
-        "--day", "-d", help="day number", metavar="D",
+        "-d", "--day", help="day number", metavar="D",
         type=int, required=True,
+    )
+    parser.add_argument(
+        "-b", "--benchmark", help="benchmark the day's solution",
+        action="store_true",
+    )
+    parser.add_argument(
+        "-i", "--input", help=(
+            "paths to input files relative to day directory (if left "
+            "out, uses all .txt files in code directory)"
+        ),
+        nargs="+",
     )
 
     # If there aren't any arguments to parse
@@ -176,5 +209,11 @@ if __name__ == "__main__":
 
     # Parse the given arguments
     args = parser.parse_args()
+    print(args)
     # Use the arguments in the main function (finally!)
-    main(**vars(args))
+    main(
+        year=args.year,
+        day=args.day,
+        benchmark=args.benchmark,
+        input_paths=args.input,
+    )
