@@ -209,7 +209,6 @@ if __name__ == "__main__":
 
     # Parse the given arguments
     args = parser.parse_args()
-    print(args)
     # Use the arguments in the main function (finally!)
     main(
         year=args.year,
