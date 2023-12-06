@@ -113,7 +113,7 @@ def main(year: int, day: int, benchmark: bool, input_paths: list[str] | None):
         print("Return values")
         # Run both parts normally
         for part in parts:
-            print(f"{part.__name__}: ", end="")
+            print(f"{part.__name__}: ", end="", flush=True)
 
             with file_path.open() as f:
                 try:
@@ -135,7 +135,7 @@ def main(year: int, day: int, benchmark: bool, input_paths: list[str] | None):
         print(f"Time for {NUMBER_OF_RUNS} runs")
         # Run both parts many times, and time them with timeit
         for part in parts:
-            print(f"{part.__name__}: ", end="")
+            print(f"{part.__name__}: ", end="", flush=True)
 
             def func_to_time():
                 with file_path.open() as f:
