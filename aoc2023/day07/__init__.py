@@ -68,7 +68,7 @@ def aoc2023_day07_part1(lines: Iterable[str]) -> int:
         ),
     ))
 
-    # The winnings are the sum of the ranks and bids of each hand
+    # The winnings are the sum of the rank-bid product of each hand
     return sum(
         rank * bid
         for rank, bid in enumerate(hands.values(), 1)
@@ -164,7 +164,7 @@ def aoc2023_day07_part2(lines: Iterable[str]) -> int:
         ),
     ))
 
-    # The winnings are the sum of the ranks and bids of each hand
+    # The winnings are the sum of the rank-bid product of each hand
     return sum(
         rank * bid
         for rank, bid in enumerate(hands.values(), 1)
