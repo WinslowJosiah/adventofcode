@@ -185,9 +185,9 @@ def aoc2023_day10_part2(lines: Iterable[str]) -> int:
         raise RuntimeError("No tiles connect to starting position")
     assert next_pos is not None  # This makes the type checker happy
 
-    # NOTE: To assist in finding ground tiles inside and outside of the
-    # loop, we change the tile at its starting position to its
-    # corresponding pipe.
+    # NOTE: To assist in finding tiles inside and outside of the loop,
+    # we change the tile at its starting position to its corresponding
+    # pipe.
     row, col = start_pos
     tiles[row][col] = next(
         char
@@ -218,8 +218,8 @@ def aoc2023_day10_part2(lines: Iterable[str]) -> int:
         tiles_on_loop.add(pos)
         last_pos, pos = pos, next_pos
 
-    # NOTE: To assist in finding ground tiles inside and outside of the
-    # loop, we remove all tiles that are not on the loop itself.
+    # NOTE: To assist in finding tiles inside and outside of the loop,
+    # we remove all tiles that are not on the loop itself.
     for row, line in enumerate(tiles):
         for col, tile in enumerate(line):
             if Vector(row, col) in tiles_on_loop:
@@ -243,7 +243,7 @@ def aoc2023_day10_part2(lines: Iterable[str]) -> int:
             for section in sections[1::2]
         )
 
-    # Return the count of inside ground tiles (finally!)
+    # Return the count of inside tiles (finally!)
     return inside_count
 
 
