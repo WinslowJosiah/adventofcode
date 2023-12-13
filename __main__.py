@@ -10,7 +10,7 @@ from typing import Any
 
 FILE_PATH = pathlib.Path(__file__).parent
 # Number of times to run for timeit
-NUMBER_OF_RUNS = 250
+NUMBER_OF_RUNS = 10
 
 
 def readlines_strip_linefeed(f: Iterable[str]) -> Iterator[str]:
