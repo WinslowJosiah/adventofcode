@@ -9,8 +9,6 @@ from typing import Any
 
 
 FILE_PATH = pathlib.Path(__file__).parent
-# Number of times to run for timeit
-NUMBER_OF_RUNS = 10
 
 
 def readlines_strip_linefeed(f: Iterable[str]) -> Iterator[str]:
@@ -55,7 +53,7 @@ def nanoseconds_str(ns: int | float) -> str:
     return f"{ns / 1e9:.3f} s"
 
 
-def main(year: int, day: int, benchmark: bool, input_paths: list[str] | None):
+def main(year: int, day: int, times_to_run: int, input_paths: list[str] | None):
     module_path = FILE_PATH.joinpath(f"aoc{year}").joinpath(f"day{day:0>2}")
 
     # Import parts tuple from the module for this year/day
@@ -129,10 +127,10 @@ def main(year: int, day: int, benchmark: bool, input_paths: list[str] | None):
 
         print()
         # Skip benchmarking if not benchmarking
-        if not benchmark:
+        if times_to_run <= 0:
             continue
 
-        print(f"Time for {NUMBER_OF_RUNS} runs")
+        print(f"Time for {times_to_run} runs")
         # Run both parts many times, and time them with timeit
         for part in parts:
             print(f"{part.__name__}: ", end="", flush=True)
@@ -147,7 +145,7 @@ def main(year: int, day: int, benchmark: bool, input_paths: list[str] | None):
                 globals=globals(),
             )
             try:
-                part_time = timer.timeit(number=NUMBER_OF_RUNS)
+                part_time = timer.timeit(number=times_to_run)
             except Exception:
                 print()
                 print()
@@ -157,7 +155,7 @@ def main(year: int, day: int, benchmark: bool, input_paths: list[str] | None):
 
             print(
                 nanoseconds_str(part_time),
-                f"({nanoseconds_str(part_time / NUMBER_OF_RUNS)} per run)"
+                f"({nanoseconds_str(part_time / times_to_run)} per run)"
             )
 
         print()
@@ -178,14 +176,19 @@ if __name__ == "__main__":
         type=int, required=True,
     )
     parser.add_argument(
-        "-b", "--benchmark", help="benchmark the day's solution",
-        action="store_true",
+        "-b", "--benchmark", help=(
+            "times to run day's solution for benchmarking (if left "
+            "out, solution is not benchmarked)"
+        ),
+        metavar="RUNS",
+        type=int, default=0,
     )
     parser.add_argument(
         "-i", "--input", help=(
             "paths to input files relative to day directory (if left "
             "out, uses all .txt files in code directory)"
         ),
+        metavar="FILE",
         nargs="+",
     )
 
@@ -213,6 +216,6 @@ if __name__ == "__main__":
     main(
         year=args.year,
         day=args.day,
-        benchmark=args.benchmark,
+        times_to_run=args.benchmark,
         input_paths=args.input,
     )
