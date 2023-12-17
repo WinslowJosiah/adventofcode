@@ -1,4 +1,4 @@
-from argparse import ArgumentParser
+from argparse import ArgumentParser, SUPPRESS
 from collections.abc import Callable, Iterable, Iterator
 import pathlib
 import sys
@@ -177,11 +177,12 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-b", "--benchmark", help=(
-            "times to run day's solution for benchmarking (if left "
-            "out, solution is not benchmarked)"
+            "times to run day's solution for benchmarking (default "
+            "100; if left out, solution is not benchmarked)"
         ),
         metavar="RUNS",
-        type=int, default=0,
+        nargs="?",
+        type=int, default=SUPPRESS,
     )
     parser.add_argument(
         "-i", "--input", help=(
@@ -212,10 +213,19 @@ if __name__ == "__main__":
 
     # Parse the given arguments
     args = parser.parse_args()
+
+    # Figure out how many times to run for benchmarking
+    times_to_run = 0
+    if "benchmark" in args:
+        if args.benchmark is not None:
+            times_to_run = args.benchmark
+        else:
+            times_to_run = 100
+
     # Use the arguments in the main function (finally!)
     main(
         year=args.year,
         day=args.day,
-        times_to_run=args.benchmark,
+        times_to_run=times_to_run,
         input_paths=args.input,
     )
