@@ -1,5 +1,7 @@
 from collections.abc import Callable, Iterable, Iterator
 from heapq import heappop, heappush
+from itertools import starmap
+from operator import add, sub, neg
 
 
 # We will represent coordinates and directions as tuples of ints
@@ -100,19 +102,17 @@ def aoc2023_day17_part1(lines: Iterable[str]) -> int:
         # For each orthogonal offset
         for offset in offsets:
             # The node at this offset is a potential neighbor
-            next_node = tuple(a + b for a, b in zip(node, offset))
-
+            next_node = tuple(starmap(add, zip(node, offset)))
             # If neighbor is out of bounds, this neighbor is invalid
             if next_node not in grid:
                 continue
 
             # Subtract these nodes to get the direction vector
-            next_direction = tuple(a - b for a, b in zip(next_node, node))
+            next_direction = tuple(starmap(sub, zip(next_node, node)))
 
             if direction is not None:
-                backwards_direction = tuple(-v for v in direction)
                 # If neighbor is backwards, this neighbor is invalid
-                if next_direction == backwards_direction:
+                if next_direction == tuple(map(neg, direction)):
                     continue
 
             turning = direction is not None and next_direction != direction
@@ -150,19 +150,17 @@ def aoc2023_day17_part2(lines: Iterable[str]) -> int:
         # For each orthogonal offset
         for offset in offsets:
             # The node at this offset is a potential neighbor
-            next_node = tuple(a + b for a, b in zip(node, offset))
-
+            next_node = tuple(starmap(add, zip(node, offset)))
             # If neighbor is out of bounds, this neighbor is invalid
             if next_node not in grid:
                 continue
 
             # Subtract these nodes to get the direction vector
-            next_direction = tuple(a - b for a, b in zip(next_node, node))
+            next_direction = tuple(starmap(sub, zip(next_node, node)))
 
             if direction is not None:
-                backwards_direction = tuple(-v for v in direction)
                 # If neighbor is backwards, this neighbor is invalid
-                if next_direction == backwards_direction:
+                if next_direction == tuple(map(neg, direction)):
                     continue
 
             turning = direction is not None and next_direction != direction
