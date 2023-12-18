@@ -20,6 +20,7 @@ def aoc2023_day09_part1(lines: Iterable[str]) -> int:
 
     return extra_sum
 
+
 def aoc2023_day09_part2(lines: Iterable[str]) -> int:
     from itertools import pairwise
 
