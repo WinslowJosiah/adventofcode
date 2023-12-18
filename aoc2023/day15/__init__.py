@@ -19,8 +19,8 @@ def holiday_hash(s: str):
     """
     # Thanks to functools.reduce, this can be a single statement!
     return reduce(
-        lambda a, b: ((a + b) * 17) % 256,
-        map(ord, s), 0
+        lambda a, b: ((a + ord(b)) * 17) % 256,
+        s, 0
     )
 
 
