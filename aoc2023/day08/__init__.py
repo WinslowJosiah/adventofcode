@@ -103,7 +103,7 @@ def aoc2023_day08_part2(lines: Iterable[str]) -> int:
     # 3. The path from each source node to its destination node is the
     # same length as the path from the destination node to itself.
     # This means each path effectively acts as an oscillator of a fixed
-    # length, and the question can be reduced to finding the LCM (least
+    # length, and the question can be reduced to finding the LCM (lowest
     # common multiple) of the path lengths.
 
     # Walk through the nodes from the start nodes, then get the LCM of
