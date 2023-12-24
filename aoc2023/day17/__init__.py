@@ -27,9 +27,9 @@ def find_path(
 
     `neighbors` is a function that takes a `PathInfo` (all the relevant
     info about the current path) and a `Vector` (the destination node)
-    as arguments, and yield the cost and `PathInfo` after following each
-    valid neighboring node. It is in this function that paths can be
-    restricted.
+    as arguments, and yields the cost and `PathInfo` after following
+    each valid neighboring node. It is in this function that paths can
+    be restricted.
     """
     # NOTE: We are using a version of Dijkstra's algorithm, which finds
     # the shortest path between two nodes in a weighted graph. We have
