@@ -43,7 +43,6 @@ def find_path(
     costs: dict[PathInfo, int] = {}
 
     # This queue stores each node that will be visited next in the path
-    # path
     queue: list[tuple[int, PathInfo]] = [(0, (src_node, None, 0))]
     while queue:
         # Get the info for the path with the lowest cost so far
