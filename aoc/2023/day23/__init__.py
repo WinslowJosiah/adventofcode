@@ -82,7 +82,6 @@ def find_longest_path(
     # search of every path from src_node to dest_node. I'm aware of a
     # much better algorithm for directed acyclic graphs (which works for
     # Part 1), but I'm unaware of a better algorithm for Part 2.
-
     visited: set[Vector] = set()
     def helper(node: Vector) -> int | None:
         if node == dest_node:

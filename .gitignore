@@ -2,6 +2,8 @@
 
 # .vscode folder
 .vscode
+# Markdownlint config
+.markdownlint-cli2.jsonc
 # Code screenshots (for sharing on social media)
 **/code.png
 

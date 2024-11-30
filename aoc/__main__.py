@@ -54,7 +54,7 @@ def nanoseconds_str(ns: int | float) -> str:
 
 
 def main(year: int, day: int, times_to_run: int, input_paths: list[str] | None):
-    module_path = FILE_PATH.joinpath(f"aoc{year}").joinpath(f"day{day:0>2}")
+    module_path = FILE_PATH.joinpath(f"{year}").joinpath(f"day{day:0>2}")
 
     # Import parts tuple from the module for this year/day
     # NOTE: parts should be a tuple with two functions, both taking an
@@ -62,7 +62,7 @@ def main(year: int, day: int, times_to_run: int, input_paths: list[str] | None):
     try:
         parts: tuple[Callable[[Iterable[str]], Any]] = getattr(
             __import__(
-                f"aoc{year}.day{day:0>2}",
+                f"{year}.day{day:0>2}",
                 globals=globals(),
                 locals=locals(),
                 fromlist=("parts",),
