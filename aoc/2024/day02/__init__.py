@@ -11,7 +11,7 @@ def check_report_safety(report: Iterable[int]) -> bool:
         # For increasing reports
         all(1 <= d <= 3 for d in diffs)
         # For decreasing reports
-        or all (-3 <= d <= -1 for d in diffs)
+        or all(-3 <= d <= -1 for d in diffs)
     )
 
 
