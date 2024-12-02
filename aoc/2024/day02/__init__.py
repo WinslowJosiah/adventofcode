@@ -4,7 +4,7 @@ import itertools as it
 
 def check_report_safety(report: Iterable[int]) -> bool:
     """
-    Check whether a given report is safe if no levels are deleted.
+    Check whether a given report is safe if no levels are removed.
     """
     diffs = [b - a for a, b in it.pairwise(report)]
     return (
