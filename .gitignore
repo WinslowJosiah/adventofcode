@@ -1,3 +1,19 @@
+# [Project-specific .gitignore stuff]
+
+# .vscode folder
+.vscode
+# Markdownlint config
+.markdownlint-cli2.jsonc
+# Code screenshots (for sharing on social media)
+**/day*/code.png
+# Puzzle input
+**/day*/input.txt
+# Puzzle descriptions
+**/day*/README.md
+
+
+# [Auto-generated Python .gitignore stuff]
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
