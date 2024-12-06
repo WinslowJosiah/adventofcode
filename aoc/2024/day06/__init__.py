@@ -95,7 +95,7 @@ def aoc2024_day06_part2(lines: Iterable[str]) -> int:
     assert not in_loop
 
     obstacles: set[Vector] = set()
-    good_obstacles: set[Vector] = set()
+    total = 0
     # For each point along the path
     for (pos_r, pos_c), (dir_r, dir_c) in path:
         obstacle = (pos_r + dir_r, pos_c + dir_c)
@@ -122,10 +122,10 @@ def aoc2024_day06_part2(lines: Iterable[str]) -> int:
         # If this obstacle makes the guard loop, count it
         _, in_loop = walk_guard(grid, guard, direction, obstacle=obstacle)
         if in_loop:
-            good_obstacles.add(obstacle)
+            total += 1
 
-    # Count the number of obstacles that made the guard loop
-    return len(good_obstacles)
+    # Return the number of obstacles that made the guard loop
+    return total
 
 
 parts = (aoc2024_day06_part1, aoc2024_day06_part2)
