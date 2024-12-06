@@ -99,14 +99,16 @@ def aoc2024_day06_part2(lines: Iterable[str]) -> int:
     # For each point along the path
     for (pos_r, pos_c), (dir_r, dir_c) in path:
         obstacle = (pos_r + dir_r, pos_c + dir_c)
-        # Skip if obstacle is over the guard's starting position
-        if obstacle == guard_start:
-            continue
-        # Skip if obstacle was tried already
-        if obstacle in obstacles:
-            continue
-        # Skip if obstacle is outside of grid
-        if obstacle not in grid:
+        if (
+            # Skip if obstacle is over the guard's starting position...
+            obstacle == guard_start
+            # ...or obstacle was tried already...
+            or obstacle in obstacles
+            # ...or obstacle is outside of grid...
+            or obstacle not in grid
+            # ...or an obstacle is already there
+            or grid[obstacle] == "#"
+        ):
             continue
         obstacles.add(obstacle)
 
