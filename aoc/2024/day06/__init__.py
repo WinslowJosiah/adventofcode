@@ -86,6 +86,7 @@ def aoc2024_day06_part1(lines: Iterable[str]) -> int:
 def aoc2024_day06_part2(lines: Iterable[str]) -> int:
     grid, guard = parse_grid(lines)
     assert guard is not None
+    guard_start = guard
     # Guard is facing up
     direction = (-1, 0)
 
@@ -98,8 +99,14 @@ def aoc2024_day06_part2(lines: Iterable[str]) -> int:
     # For each point along the path
     for (pos_r, pos_c), (dir_r, dir_c) in path:
         obstacle = (pos_r + dir_r, pos_c + dir_c)
-        # Skip if obstacle was tried already or is outside of grid
-        if obstacle in obstacles or obstacle not in grid:
+        # Skip if obstacle is over the guard's starting position
+        if obstacle == guard_start:
+            continue
+        # Skip if obstacle was tried already
+        if obstacle in obstacles:
+            continue
+        # Skip if obstacle is outside of grid
+        if obstacle not in grid:
             continue
         obstacles.add(obstacle)
 
