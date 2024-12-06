@@ -27,7 +27,7 @@ def walk_guard(
         obstacle: Vector | None = None,
 ) -> tuple[list[tuple[Vector, Vector]], bool]:
     """
-    Walk the guard through the grid, until he either steps outside the
+    Walk the guard through the grid, until she either steps outside the
     grid or loops. Returns the path the guard takes, and whether or not
     the path loops.
     """
