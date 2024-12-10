@@ -28,7 +28,7 @@ def aoc2024_day10_part1(lines: Iterable[str]) -> int:
         If this location doesn't have a height of 0, this can't be a
         trailhead, and it is given a default score of 0.
         """
-        max_height_locations: set[tuple[int, int]] = set()
+        max_height_locations: set[Location] = set()
         def walk(r: int, c: int, height: int = 0):
             # Stop walking if this location is outside the grid, or if
             # the height doesn't match
