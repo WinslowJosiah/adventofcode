@@ -56,18 +56,18 @@ def aoc2024_day10_part1(lines: Iterable[str]) -> int:
 def aoc2024_day10_part2(lines: Iterable[str]) -> int:
     grid = parse_grid(lines)
 
-    def get_trailhead_score(location: Location) -> int:
+    def get_trailhead_rating(location: Location) -> int:
         """
-        Get the score of this trailhead, where the score is the number
+        Get the rating of this trailhead, where the rating is the number
         of unique trails that reach a 9-height location from this
         0-height location.
 
         If this location doesn't have a height of 0, this can't be a
-        trailhead, and it is given a default score of 0.
+        trailhead, and it is given a default rating of 0.
         """
-        score = 0
+        rating = 0
         def walk(r: int, c: int, height: int = 0):
-            nonlocal score
+            nonlocal rating
 
             # Stop walking if this location is outside the grid, or if
             # the height doesn't match
@@ -75,8 +75,8 @@ def aoc2024_day10_part2(lines: Iterable[str]) -> int:
                 return
             # If the height here is 9
             if height >= 9:
-                # Add to the trailhead score and stop walking
-                score += 1
+                # Add to the trailhead rating and stop walking
+                rating += 1
                 return
 
             # Try walking from all directions
@@ -87,9 +87,9 @@ def aoc2024_day10_part2(lines: Iterable[str]) -> int:
 
         # Start walking from this location
         walk(*location)
-        return score
+        return rating
 
-    return sum(map(get_trailhead_score, grid))
+    return sum(map(get_trailhead_rating, grid))
 
 
 parts = (aoc2024_day10_part1, aoc2024_day10_part2)
