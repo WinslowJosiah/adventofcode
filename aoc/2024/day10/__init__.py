@@ -36,7 +36,7 @@ def aoc2024_day10_part1(lines: Iterable[str]) -> int:
                 return
             # If the height here is 9
             if height >= 9:
-                # Mark this location has visited and stop walking
+                # Mark this location as visited and stop walking
                 max_height_locations.add((r, c))
                 return
 
