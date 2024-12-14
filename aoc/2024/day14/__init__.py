@@ -1,4 +1,5 @@
 from collections.abc import Iterable
+from math import prod
 from typing import cast, TypeAlias
 
 
@@ -30,26 +31,31 @@ def parse_input(lines: Iterable[str]) -> tuple[list[Robot], int, int]:
     return (robots, width, height)
 
 
-def aoc2024_day14_part1(lines: Iterable[str]) -> int:
-    from math import prod
+def get_safety_index(robots: Iterable[Robot], width: int, height: int) -> int:
+    quadrants = [0] * 4
+    for (px, py), _ in robots:
+        # If the robot is exactly between quadrants, don't count it
+        if px == width // 2 or py == height // 2:
+            continue
+        # Tally this robot in the correct quadrant
+        qx = px // (width // 2 + 1)
+        qy = py // (height // 2 + 1)
+        quadrants[qy * 2 + qx] += 1
+    return prod(quadrants)
 
+
+def aoc2024_day14_part1(lines: Iterable[str]) -> int:
     robots, width, height = parse_input(lines)
 
-    quadrants = [0 for _ in range(4)]
-    for (px, py), (vx, vy) in robots:
-        # Calculate this robot's position after 100 seconds
-        endx = (px + vx * 100) % width
-        endy = (py + vy * 100) % height
-        # If the robot is exactly between quadrants, don't count it
-        if endx == width // 2 or endy == height // 2:
-            continue
-
-        # Tally this robot in the correct quadrant
-        qx = endx // (width // 2 + 1)
-        qy = endy // (height // 2 + 1)
-        quadrants[qy * 2 + qx] += 1
-
-    return prod(quadrants)
+    # Simulate the robots' positions after 100 seconds
+    robots = [
+        (
+            ((px + vx * 100) % width, (py + vy * 100) % height),
+            (vx, vy),
+        )
+        for (px, py), (vx, vy) in robots
+    ]
+    return get_safety_index(robots, width, height)
 
 
 def aoc2024_day14_part2(lines: Iterable[str]) -> int:
@@ -58,8 +64,11 @@ def aoc2024_day14_part2(lines: Iterable[str]) -> int:
     # NOTE The largest number of seconds to wait before seeing the
     # picture is the number of tiles, because the configurations will
     # loop after at most that long.
-    for second in range(1, width * height + 1):
-        # Calculate each robot's position after a second
+    safety_indices: list[int] = []
+    for _ in range(width * height + 1):
+        safety_indices.append(get_safety_index(robots, width, height))
+
+        # Calculate each robot's position after another second
         robots = [
             (
                 ((px + vx) % width, (py + vy) % height),
@@ -67,14 +76,15 @@ def aoc2024_day14_part2(lines: Iterable[str]) -> int:
             )
             for (px, py), (vx, vy) in robots
         ]
-        # If every robot is in a unique position
-        if len({p for p, _ in robots}) == len(robots):
-            # There's the picture!
-            # NOTE I have no idea how I was supposed to know what this
-            # condition was.
-            return second
 
-    assert False  # We should never get here
+    # NOTE The safety index will (probably) be the lowest at the point
+    # when the picture shows up. (I found this approach after looking at
+    # someone's code golf solution.) I have no idea how I was supposed
+    # to figure this out.
+    return min(
+        range(len(safety_indices)),
+        key=safety_indices.__getitem__,
+    )
 
 
 parts = (aoc2024_day14_part1, aoc2024_day14_part2)
