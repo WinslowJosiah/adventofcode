@@ -79,8 +79,6 @@ def aoc2024_day15_part2(lines: Iterable[str]) -> int:
 
     line_iter = iter(lines)
     # Compile the grid until the first blank line
-    # NOTE We're using complex numbers to store positions and offsets,
-    # because it's easier than juggling items in tuples.
     grid: defaultdict[complex, str] = defaultdict(lambda: "#")
     robot: complex | None = None
     for y, row in enumerate(line_iter):
