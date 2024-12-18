@@ -50,26 +50,25 @@ def run_program(program: Program, registers: Registers) -> Iterator[int]:
 
     pointer = 0
     while pointer < len(program):
-        opcode, operand = program[pointer:pointer + 2]
-        match opcode:
-            case 0:  # adv (A DiVide)
+        match program[pointer:pointer + 2]:
+            case 0, operand:  # adv (A DiVide)
                 registers["A"] >>= combo_operand(operand)
-            case 1:  # bxl (B Xor Literal)
+            case 1, operand:  # bxl (B Xor Literal)
                 registers["B"] ^= operand
-            case 2:  # bst (B STore)
+            case 2, operand:  # bst (B STore)
                 registers["B"] = combo_operand(operand) & 0b111
-            case 3:  # jnz (Jump if Not Zero)
+            case 3, operand:  # jnz (Jump if Not Zero)
                 if registers["A"]:
                     # NOTE I subtract 2 so that moving to the next
                     # instruction will set the pointer to the operand.
                     pointer = operand - 2
-            case 4:  # bxc (B Xor C)
+            case 4, _:  # bxc (B Xor C)
                 registers["B"] ^= registers["C"]
-            case 5:  # out (OUTput)
+            case 5, operand:  # out (OUTput)
                 yield combo_operand(operand) & 0b111
-            case 6:  # bdv (B DiVide)
+            case 6, operand:  # bdv (B DiVide)
                 registers["B"] = registers["A"] >> combo_operand(operand)
-            case 7:  # cdv (C DiVide)
+            case 7, operand:  # cdv (C DiVide)
                 registers["C"] = registers["A"] >> combo_operand(operand)
             case _:  # Default case
                 # This shouldn't happen
