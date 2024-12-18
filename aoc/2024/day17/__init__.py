@@ -110,9 +110,10 @@ def aoc2024_day17_part2(lines: Iterable[str]) -> int:
     INPUT_BITS = 7 + SHIFT
 
     # Cache the first output for every considered value of A
-    output_cache: dict[int, int] = {}
-    for a in range(1 << INPUT_BITS):
-        output_cache[a] = next(run_program(program, registers | {"A": a}))
+    output_cache = {
+        a: next(run_program(program, registers | {"A": a}))
+        for a in range(1 << INPUT_BITS)
+    }
 
     # Recursively find every input that outputs the program
     def find_quine_inputs() -> Iterator[int]:
