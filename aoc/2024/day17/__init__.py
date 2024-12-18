@@ -46,7 +46,7 @@ def run_program(program: Program, registers: Registers) -> Iterator[int]:
             case 6:
                 return registers["C"]
             case _:
-                raise RuntimeError(f"Combo operand is reserved")
+                raise RuntimeError("Combo operand is reserved")
 
     pointer = 0
     while pointer < len(program):
