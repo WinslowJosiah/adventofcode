@@ -4,8 +4,8 @@
 .vscode
 # Markdownlint config
 .markdownlint-cli2.jsonc
-# Code screenshots (for sharing on social media)
-**/day*/code.png
+# Folder of alternate solutions
+alts/
 # Puzzle input
 **/day*/input.txt
 # Puzzle descriptions
