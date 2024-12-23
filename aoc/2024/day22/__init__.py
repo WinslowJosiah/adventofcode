@@ -1,4 +1,3 @@
-from collections import Counter, deque
 from collections.abc import Iterable
 
 
@@ -25,6 +24,8 @@ def aoc2024_day22_part1(lines: Iterable[str]) -> int:
 
 
 def aoc2024_day22_part2(lines: Iterable[str]) -> int:
+    from collections import Counter, deque
+
     profits: Counter[tuple[int, ...]] = Counter()
 
     for secret in map(int, lines):
