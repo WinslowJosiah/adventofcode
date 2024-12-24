@@ -30,7 +30,7 @@ def aoc2024_day22_part2(lines: Iterable[str]) -> int:
 
     for secret in map(int, lines):
         # Last price for this buyer
-        last_price = None
+        last_price = secret % 10
         # Last 4 price differences
         last_diffs: deque[int] = deque(maxlen=4)
         assert last_diffs.maxlen is not None
@@ -39,9 +39,10 @@ def aoc2024_day22_part2(lines: Iterable[str]) -> int:
 
         # For this buyer's next 2000 secret numbers
         for _ in range(2000):
+            secret = next_secret(secret)
             price = secret % 10
-            if last_price is not None:
-                last_diffs.append(price - last_price)
+            last_diffs.append(price - last_price)
+            last_price = price
 
             # If there are at least enough price differences to use
             if len(last_diffs) >= last_diffs.maxlen:
@@ -50,9 +51,6 @@ def aoc2024_day22_part2(lines: Iterable[str]) -> int:
                 # hasn't been seen yet. So if we see the same price
                 # differences again, this will do nothing.
                 diffs_to_profit.setdefault(tuple(last_diffs), price)
-
-            last_price = price
-            secret = next_secret(secret)
 
         # Count profits from this buyer for all possible collections of
         # price difference
