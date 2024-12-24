@@ -1,5 +1,4 @@
 from collections.abc import Iterable, Iterator, Mapping
-import itertools as it
 from typing import TypeVar
 
 
@@ -17,6 +16,8 @@ def get_computers(lines: Iterable[str]) -> dict[str, set[str]]:
 
 
 def aoc2024_day23_part1(lines: Iterable[str]) -> int:
+    import itertools as it
+
     computers = get_computers(lines)
     groups: set[frozenset[str]] = set()
     for name, connections in computers.items():
