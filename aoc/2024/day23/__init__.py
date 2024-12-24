@@ -1,5 +1,4 @@
 from collections.abc import Iterable, Iterator, Mapping
-from typing import TypeVar
 
 
 def get_computers(lines: Iterable[str]) -> dict[str, set[str]]:
@@ -33,8 +32,7 @@ def aoc2024_day23_part1(lines: Iterable[str]) -> int:
     return len(groups)
 
 
-N = TypeVar("N")
-def find_maximal_cliques(
+def find_maximal_cliques[N](
         graph: Mapping[N, Iterable[N]],
         clique: set[N] | None = None,
         potential_nodes: set[N] | None = None,
