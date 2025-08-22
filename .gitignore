@@ -10,6 +10,8 @@ alts/
 **/day*/input.txt
 # Puzzle descriptions
 **/day*/README.md
+# The Drakaina, before being one-line-ified
+drakaina_formatted.py
 
 
 # [Auto-generated Python .gitignore stuff]
