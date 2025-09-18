@@ -59,7 +59,7 @@ def aoc2023_day13_part1(lines: Iterable[str]) -> int:
             continue
 
         # Transpose the grid, so the rows become columns and vice versa
-        grid = list(zip(*grid))
+        grid = ["".join(r) for r in zip(*grid)]
 
         # Try finding a line of symmetry along the columns
         symmetry_line = find_row_symmetry_line(grid)
@@ -151,7 +151,7 @@ def aoc2023_day13_part2(lines: Iterable[str]) -> int:
             continue
 
         # Transpose the grid, so the rows become columns and vice versa
-        grid = list(zip(*grid))
+        grid = ["".join(r) for r in zip(*grid)]
 
         # Try finding a line of symmetry along the columns
         symmetry_line = find_row_symmetry_line(grid)
