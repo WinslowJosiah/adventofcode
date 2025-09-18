@@ -1,0 +1,224 @@
+/* General */
+html {
+  font-size: clamp(14px, 2.75vw, 16px);
+  line-height: 1.5;
+
+  scrollbar-color: var(--border-color) var(--background-color);
+  scrollbar-width: thin;
+}
+
+ul {
+  padding-inline-start: clamp(1.5rem, -1.5rem + 11.2vw, 2.5rem);
+}
+
+figure img {
+  width: auto;
+  height: auto;
+}
+
+/* Code blocks */
+.expressive-code {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* HACK holiday.css is too opinionated about its <pre> styling. These styles are
+mostly an attempt to fix this so <pre> blocks work with Expressive Code. */
+.expressive-code pre {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border-radius: calc(var(--ec-brdRad) + var(--ec-brdWd)) !important;
+
+  scrollbar-color: var(--border-color) var(--background-color) !important;
+}
+
+.expressive-code .frame.has-title pre,
+.expressive-code .frame.is-terminal pre {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+/* Content header */
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+  border-bottom: 1px solid var(--border-color);
+}
+
+main h2 a:not(.no-anchor),
+main h3 a:not(.no-anchor),
+main h4 a:not(.no-anchor),
+main h5 a:not(.no-anchor),
+main h6 a:not(.no-anchor) {
+  color: var(--text-color);
+}
+
+main h2 a:not(.no-anchor):hover::after,
+main h3 a:not(.no-anchor):hover::after,
+main h4 a:not(.no-anchor):hover::after,
+main h5 a:not(.no-anchor):hover::after,
+main h6 a:not(.no-anchor):hover::after {
+  content: " #";
+}
+
+/* Page footer */
+body > footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 0.5rem 1rem;
+
+  font-size: 0.888rem;
+}
+
+body > footer #footer-text {
+  text-align: left;
+}
+
+body > footer #footer-socials {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 1 auto;
+}
+
+body > footer #footer-socials a {
+  font-size: 30px;
+}
+
+@media screen and (max-width: 540px) {
+  body > footer {
+    flex-direction: column;
+  }
+
+  body > footer #footer-text {
+    text-align: center;
+  }
+
+  body > footer #footer-socials {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Admonitions */
+[data-admonition] {
+  --alert-color: #6e7681;
+  --alert-color-rgb: 110, 118, 129;
+  --alert-icon: "\f228"; /* bi-card-text */
+
+  background-color: rgba(var(--alert-color-rgb), 0.1);
+
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+
+  border-left: 0.5rem solid var(--alert-color);
+
+  overflow: hidden;
+}
+
+[data-admonition] > p:first-child {
+  color: var(--alert-color);
+
+  font-weight: bold;
+
+  margin-top: 0;
+}
+
+[data-admonition] > p:first-child::before {
+  content: var(--alert-icon);
+  display: inline-block;
+
+  font-family: bootstrap-icons;
+  font-weight: normal;
+  line-height: 1;
+
+  margin-right: 0.5rem;
+
+  vertical-align: -0.125em;
+}
+
+[data-admonition] > p:last-child {
+  margin-bottom: 0;
+}
+
+[data-admonition=attention] {
+  --alert-color: #d29922;
+  --alert-color-rgb: 210, 153, 34;
+  --alert-icon: "\f333"; /* bi-exclamation-circle */
+}
+
+[data-admonition=caution] {
+  --alert-color: #db6d28;
+  --alert-color-rgb: 219, 109, 40;
+  --alert-icon: "\f335"; /* bi-exclamation-diamond */
+}
+
+[data-admonition=danger] {
+  --alert-color: #f85149;
+  --alert-color-rgb: 248, 81, 73;
+  --alert-icon: "\f337"; /* bi-exclamation-octagon */
+}
+
+[data-admonition=error] {
+  --alert-color: #da3633;
+  --alert-color-rgb: 218, 54, 51;
+  --alert-icon: "\f623"; /* bi-x-circle */
+}
+
+[data-admonition=hint] {
+  --alert-color: #3fb950;
+  --alert-color-rgb: 63, 185, 80;
+  --alert-icon: "\f46b"; /* bi-lightbulb */
+}
+
+[data-admonition=important] {
+  --alert-color: #8957e5;
+  --alert-color-rgb: 137, 87, 229;
+  --alert-icon: "\f265"; /* bi-chat-square */
+}
+
+[data-admonition=note] {
+  --alert-color: #4493f8;
+  --alert-color-rgb: 68, 147, 248;
+  --alert-icon: "\f431"; /* bi-info-circle */
+}
+
+[data-admonition=tip] {
+  --alert-color: #238636;
+  --alert-color-rgb: 35, 134, 54;
+  --alert-icon: "\f46b"; /* bi-lightbulb */
+}
+
+[data-admonition=warning] {
+  --alert-color: #b97d04;
+  --alert-color-rgb: 185, 125, 4;
+  --alert-icon: "\f33b"; /* bi-exclamation-triangle */
+}
+
+/* MathJax */
+mjx-container {
+  position: relative;
+
+  overflow: auto hidden;
+
+  scrollbar-color: var(--border-color) var(--background-color);
+  scrollbar-width: thin;
+}
+
+mjx-copytext {
+  display: inline-block;
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  opacity: 0;
+
+  pointer-events: none;
+}

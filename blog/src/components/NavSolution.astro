@@ -1,0 +1,73 @@
+---
+import { getEntry } from "astro:content";
+import { isPublished } from "../utils/collections";
+
+interface Props {
+  day: number;
+  year: number;
+}
+
+const { day, year } = Astro.props;
+const prevSlug = `${year}/day/${day - 1}`;
+const nextSlug = `${year}/day/${day + 1}`;
+
+const prev = await getEntry("solutions", prevSlug);
+const next = await getEntry("solutions", nextSlug);
+---
+<footer>
+  {
+    prev && isPublished(prev) && (
+      <a href={`/solutions/${prevSlug}`} class="prev">&larr; Day {day - 1}</a>
+    )
+  }
+  <a
+    href={`https://github.com/WinslowJosiah/adventofcode/blob/main/solutions/${
+      year
+    }/day${String(day).padStart(2, "0")}/solution.py`}
+    target="_blank"
+    class="solution"
+  >
+    Published Solution
+  </a>
+  <a href={`/solutions/${year}`} class="back-to-year">Back to {year}</a>
+  {
+    next && isPublished(next) && (
+      <a href={`/solutions/${nextSlug}`} class="next">Day {day + 1} &rarr;</a>
+    )
+  }
+</footer>
+
+<style>
+  .prev {
+    grid-area: prev;
+    text-align: left;
+  }
+  .solution {
+    grid-area: soln;
+    text-align: center;
+  }
+  .back-to-year {
+    grid-area: back;
+    text-align: center;
+  }
+  .next {
+    grid-area: next;
+    text-align: right;
+  }
+
+  footer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: "prev soln back next";
+    gap: 10px 0;
+  }
+
+  @media screen and (max-width: 500px) {
+    footer {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        "prev back next"
+        "soln soln soln";
+    }
+  }
+</style>

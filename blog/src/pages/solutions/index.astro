@@ -1,0 +1,44 @@
+---
+import { type Solution, getSolutionsByYear } from "../../utils/collections";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Layout from "../../layouts/Layout.astro";
+
+type Props = { year: number, solutions: Solution[] };
+
+const loadSolutions: () => Promise<Props[]> = async () => {
+  const solutions = await getSolutionsByYear();
+  return [...solutions.entries()]
+    .map(([year, solutions]) => ({
+      year,
+      solutions: solutions.toSorted((a, b) => a.data.day - b.data.day),
+    }))
+    .sort((a, b) => b.year - a.year);
+};
+
+const solutions = await loadSolutions();
+---
+<Layout
+  seo={{
+    title: `All Solutions | Josiah Winslow solves Advent of Code`,
+    description: `Complete Python solutions to every puzzle from Advent of Code (at least, the ones solved by Josiah Winslow).`,
+  }}
+>
+  <Breadcrumbs page="solutions" />
+  <h1>All Solutions</h1>
+  {
+    solutions.map(({ year, solutions }) => (
+      <h2>
+        <a href={`/solutions/${year}`} class="no-anchor">{year}</a>
+      </h2>
+      <ul>
+        {
+          solutions.map(({ data: { day, title } }) => (
+            <li>
+              <a href={`/solutions/${year}/day/${day}`}>Day {day}</a>: {title}
+            </li>
+          ))
+        }
+      </ul>
+    ))
+  }
+</Layout>

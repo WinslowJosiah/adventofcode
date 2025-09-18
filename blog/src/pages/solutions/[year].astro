@@ -1,0 +1,37 @@
+---
+import { type Solution, getSolutionsByYear } from "../../utils/collections";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = async () => {
+  const years = await getSolutionsByYear();
+
+  return [...years.entries()].map(([year, solutions]) => ({
+    params: { year },
+    props: {
+      year,
+      solutions: solutions.toSorted((a, b) => a.data.day - b.data.day),
+    },
+  }));
+};
+
+const { year, solutions } = Astro.props;
+---
+<Layout
+  seo={{
+    title: `${year} Solutions | Josiah Winslow solves Advent of Code`,
+    description: `Complete Python solutions to every puzzle from Advent of Code ${year}.`,
+  }}
+>
+  <Breadcrumbs path={["solutions"]} page={String(year)} />
+  <h1>{year} Solutions</h1>
+  <ul>
+    {
+      solutions.map(({ data: { day, title }}) => (
+        <li>
+          <a href={`/solutions/${year}/day/${day}`}>Day {day}</a>: {title}
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

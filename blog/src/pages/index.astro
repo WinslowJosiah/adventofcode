@@ -1,0 +1,67 @@
+---
+import { getSolutionsByYear } from "../utils/collections";
+
+import Layout from "../layouts/Layout.astro";
+import { Content as IndexContent } from "../components/Index.md";
+
+const NUM_RECENT_YEARS = 3;
+const NUM_RECENT_POSTS = 5;
+
+const posts = await getSolutionsByYear();
+
+const recentYears = [...posts.keys()]
+	.toSorted((a, b) => b - a)
+	.slice(0, NUM_RECENT_YEARS);
+const thisYearsPosts = posts.get(recentYears[0]);
+const showEllipsis = Number(thisYearsPosts?.length) > NUM_RECENT_POSTS;
+const newestPosts = thisYearsPosts
+	?.toSorted((a, b) => a.data.day - b.data.day)
+	.slice(-NUM_RECENT_POSTS);
+---
+<Layout>
+	<nav>
+		<pre>C:.
+<!--├───<a href="/concepts">concepts</a>
+│   └───...
+-->└───<a href="/solutions">solutions</a>
+{recentYears.map((year, index) => (
+	<>
+		{"    ├───"}
+		<a href={`/solutions/${year}`}>{year}</a><br />{
+			index === 0 && (
+				<>
+					{showEllipsis && "    │   ├───...\n"}
+					{newestPosts?.map((post, postIndex) => (
+						<>
+							{postIndex !== newestPosts.length - 1 ? "    │   ├───" : "    │   └───"}
+							<a href={`/solutions/${post.slug}`}>Day {post.data.day}</a>: {post.data.title}</><br />
+					))}
+				</>
+			)
+		}
+	</>
+))}    └───...</pre>
+	</nav>
+
+	<IndexContent />
+</Layout>
+
+<style>
+	nav {
+    all: unset;
+    display: flex;
+		justify-content: center;
+	}
+
+	pre {
+		display: block;
+
+		font-size: 0.888rem;
+
+		width: calc(var(--max-body-width) * 0.65);
+		max-width: calc(100% + 1rem);
+
+		margin: 0 -0.5rem !important;
+		padding: 1rem clamp(0.5rem, 2.75vw, 1rem) !important;
+	}
+</style>

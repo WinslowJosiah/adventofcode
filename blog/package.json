@@ -1,0 +1,31 @@
+{
+  "name": "blog",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.10",
+    "@expressive-code/plugin-collapsible-sections": "^0.41.3",
+    "astro": "^5.15.8",
+    "astro-expressive-code": "^0.41.3",
+    "astro-seo": "^0.8.4",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-mathjax": "^7.1.0",
+    "remark-directive": "^4.0.0",
+    "remark-directive-rehype": "^0.4.2",
+    "remark-directive-sugar": "^1.1.2",
+    "remark-math": "^6.0.0",
+    "remark-rehype": "^11.1.2",
+    "remark-stringify": "^11.0.0",
+    "sharp": "^0.34.5",
+    "strip-markdown": "^6.0.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
+  }
+}

@@ -1,0 +1,60 @@
+---
+import { getConcepts } from "../../utils/collections";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = async () => {
+  const concepts = await getConcepts();
+  return concepts.map(({ slug, ...concept }) => ({
+    params: { slug },
+    props: concept,
+  }));
+};
+
+const concept = Astro.props;
+const { Content } = await concept.render();
+const { data: { title, category } } = Astro.props;
+
+const conceptTitle = `Concept: ${title}`;
+---
+<Layout
+  seo={{
+    title: conceptTitle,
+    tabTitle: `${title} | Josiah Winslow solves Advent of Code`,
+    description: `An explanation of the programming concept of ${title}.`,
+  }}
+>
+  <Breadcrumbs path={["concepts"]} page={`${title}`} />
+  <article>
+    <h1>{title}</h1>
+    {
+      category && (
+        <div class="category">Category: {category}</div>
+      )
+    }
+
+    <Content />
+  </article>
+</Layout>
+
+<style>
+  h1 {
+    text-align: center;
+
+    margin-bottom: 0.45em;
+  }
+
+  .category {
+    width: 100%;
+
+    margin-top: 0.35rem;
+
+    text-align: center;
+  }
+
+  @media screen and (max-width: 360px) {
+    h1 {
+      margin-bottom: 0.35em;
+    }
+  }
+</style>

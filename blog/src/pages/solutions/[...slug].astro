@@ -1,0 +1,111 @@
+---
+import { type Concept, getConcepts, getPublishedSolutions } from "../../utils/collections";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Layout from "../../layouts/Layout.astro";
+import NavSolution from "../../components/NavSolution.astro";
+
+export const getStaticPaths = async () => {
+  const solutions = await getPublishedSolutions();
+  return solutions.map(({ slug, ...solution }) => ({
+    params: { slug },
+    props: solution,
+  }));
+};
+
+const loadConceptsBySlug: () => Promise<Map<string, Concept>> = async () => {
+  const concepts = await getConcepts();
+  return concepts.reduce((result, concept) => {
+    result.set(concept.slug, concept);
+    return result;
+  }, new Map<string, Concept>());
+};
+
+const conceptsBySlug = await loadConceptsBySlug();
+
+const solution = Astro.props;
+const { Content } = await solution.render();
+const { data: { year, day, title, pub_date, concepts } } = Astro.props;
+
+const solutionTitle = `Advent of Code ${year} Day ${day}: ${title}`
+---
+<Layout
+  seo={{
+    title: solutionTitle,
+    tabTitle: `${year} Day ${day}: ${title} | Josiah Winslow solves Advent of Code`,
+    description: `A complete Python solution to Advent of Code ${year} Day ${day}.`,
+    pubDate: pub_date,
+  }}
+>
+  <Breadcrumbs path={["solutions", String(year)]} page={`Day\u00A0${day}`} />
+  <article>
+    <h1>{title}</h1>
+    <div class="info">
+      <span>Published: <code>{pub_date || "TBD"}</code></span>
+      <a href={`https://adventofcode.com/${year}/day/${day}`}>Original Prompt</a>
+    </div>
+    {
+      concepts && (
+        <div class="concepts">
+          Concepts: {
+            concepts.map((conceptSlug, index) => {
+              const comma = index !== concepts.length - 1 ? ", " : "";
+
+              const concept = conceptsBySlug.get(conceptSlug);
+              if (!concept) return <code>{conceptSlug}</code><>{comma}</>;
+
+              return (
+                <a href={`/concepts/${conceptSlug}`}>{
+                  concept.data.title
+                }</a><>{comma}</>
+              );
+            })
+          }
+        </div>
+      )
+    }
+
+    <Content />
+  </article>
+  <hr />
+  <NavSolution day={day} year={year} />
+</Layout>
+
+<style>
+  h1 {
+    text-align: center;
+
+    margin-bottom: 0.45em;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.35rem 0.7rem;
+
+    text-align: center;
+  }
+
+  .info > * {
+    width: 100%;
+  }
+
+  .concepts {
+    width: 100%;
+
+    margin-top: 0.35rem;
+
+    text-align: center;
+  }
+
+  @media screen and (max-width: 360px) {
+    h1 {
+      margin-bottom: 0.35em;
+    }
+
+    .info {
+      flex-direction: column;
+    }
+  }
+</style>

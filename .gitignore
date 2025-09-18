@@ -2,14 +2,8 @@
 
 # .vscode folder
 .vscode
-# Markdownlint config
-.markdownlint-cli2.jsonc
-# Folder of alternate solutions
-alts/
 # Puzzle input
-**/day*/input.txt
-# Puzzle descriptions
-**/day*/README.md
+solutions/*/day*/input.txt
 # The Drakaina, before being one-line-ified
 drakaina_formatted.py
 
