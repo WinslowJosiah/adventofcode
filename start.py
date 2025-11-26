@@ -64,21 +64,25 @@ def main(year: int, day: int):
     day_dir = Path(year_dir, f"day{day:02}")
     day_dir.mkdir(parents=True, exist_ok=True)
 
-    # Create input and test files
-    Path(day_dir, "input.txt").touch()
-    Path(day_dir, "test.txt").touch()
-
     # Create solution file
     solution_path = Path(day_dir, "solution.py")
     if solution_path.exists():
-        print("solution file exists")
-    else:
-        template = Path(FILE_DIR, "solution.py.tmpl").read_text()
-        replaced_template = (
-            template.replace("{{year}}", str(year))
-            .replace("{{day}}", str(day))
-        )
-        solution_path.write_text(replaced_template)
+        print("Solution file exists; this is probably a rerun.")
+        return
+
+    # Populate solution file using template
+    template = Path(FILE_DIR, "solution.py.tmpl").read_text()
+    replaced_template = (
+        template.replace("{{year}}", str(year))
+        .replace("{{day}}", str(day))
+    )
+    solution_path.write_text(replaced_template)
+
+    # Create input and test files
+    Path(day_dir, "input.txt").touch()
+    # NOTE If any test files already exist, we won't create a new one.
+    if not any(day_dir.glob("test*.txt")):
+        Path(day_dir, "test.txt").touch()
 
     print(f"AoC {year} Day {day} initialized at: {day_dir}")
 
