@@ -109,6 +109,43 @@ def neighbors(
         yield next_r, next_c
 
 
+def offsets(
+        num_directions: int = 8,
+        *,
+        diagonals: bool = False,
+) -> Iterator[GridPoint]:
+    """
+    Return the set of `GridPoint` offsets that represent "neighbor"
+    directions.
+
+    `num_directions` must be one of the following values, which result
+    in the following offsets being yielded:
+    - 4: The offsets in the N, W, E, and S directions (or the NW, NE,
+    SW, and SE directions, if `diagonals` is true).
+    - 8: The offsets in the NW, N, NE, W, E, SW, S, and SE directions.
+    - 9: The offsets yielded when `num_directions` is 8, and the
+    central offset (0, 0) itself.
+
+    Parameters
+    ----------
+    num_directions : {4, 8, 9}, default 8
+        Number of directions to find offsets for.
+    diagonals : bool, default False
+        If true and `num_directions` is 4, only the diagonally adjacent
+        offsets are yielded.
+
+    Yields
+    ------
+    list of GridPoint
+        Offsets representing neighbor directions.
+    """
+    yield from neighbors(
+        (0, 0),
+        num_directions=num_directions,
+        diagonals=diagonals,
+    )
+
+
 def add_points(a: GridPoint, b: GridPoint) -> GridPoint:
     """
     Return the result of adding the coordinates of two `GridPoint`s.
