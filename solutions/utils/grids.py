@@ -311,6 +311,8 @@ class Direction(IntEnum):
         Direction
             Rotated direction.
         """
+        if towards not in {"CCW", "CW"}:
+            raise ValueError(f"invalid rotation: {towards}")
         offset = 1 if towards == "CW" else -1
         return Direction((self.value + offset) % 4)
 
