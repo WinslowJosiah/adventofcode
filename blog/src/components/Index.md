@@ -4,9 +4,9 @@ _With massive inspiration from (and apologies to) [David Brownman](https://xavd.
 
 [Advent of Code](https://adventofcode.com) is a yearly advent calendar of
 programming puzzles created by [Eric Wastl](https://was.tl). Every day of
-December until Christmas features a two-part puzzle, with the second part
-unlocking after the first is completed. This website compiles my own solutions
-and explanations for each puzzle I've solved.
+December until the end of the event features a two-part puzzle, with the second
+part unlocking after the first is completed. This website compiles my own
+solutions and explanations for each puzzle I've solved.
 
 I've been solving Advent of Code with Python since 2023 and sharing my
 solution explanations since 2024. I try -- hopefully sometimes successfully --
