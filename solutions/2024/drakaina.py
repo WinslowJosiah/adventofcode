@@ -51,7 +51,7 @@ y = {
     3: r"day03/input.txt",
     4: r"day04/input.txt",
     5: r"day05/input.txt",
-    6: r"day06/example.txt",  # slow-ish on real input
+    6: r"day06/test.txt",  # slow-ish on real input
     7: r"day07/input.txt",
     8: r"day08/input.txt",
     9: r"day09/input.txt",
@@ -59,15 +59,15 @@ y = {
     11: r"day11/input.txt",
     12: r"day12/input.txt",
     13: r"day13/input.txt",
-    14: r"day14/example.txt",  # slow-ish on real input
-    15: r"day15/example1.txt",  # slow-ish on real input
+    14: r"day14/test.txt",  # slow-ish on real input
+    15: r"day15/test1.txt",  # slow-ish on real input
     16: r"day16/input.txt",
     17: r"day17/input.txt",
     18: r"day18/input.txt",
     19: r"day19/input.txt",
-    20: r"day20/example.txt",  # slow-ish on real input
+    20: r"day20/test.txt",  # slow-ish on real input
     21: r"day21/input.txt",
-    22: r"day22/example2.txt",  # slow-ish on real input
+    22: r"day22/test2.txt",  # slow-ish on real input
     23: r"day23/input.txt",
     24: r"day24/input.txt",
     25: r"day25/input.txt",
