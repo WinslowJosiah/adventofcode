@@ -4,8 +4,10 @@
 .vscode
 # Puzzle input
 solutions/*/day*/input.txt
-# The Drakaina, before being one-line-ified
+# The Drakaina (2024), before being one-line-ified
 drakaina_formatted.py
+# The Brahminy (2025), before being one-line-ified
+brahminy_formatted.py
 
 
 # [Auto-generated Python .gitignore stuff]
