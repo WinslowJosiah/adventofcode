@@ -142,7 +142,11 @@ do that when the left-hand side is considered false.
 Once we calculate this number and rotate the dial, we can do the logic for both
 Parts 1 and 2 at the same time! We can add 1 to a tally of `hits` if 0 is
 reached exactly, and we can use our formula from before to increase a tally of
-`passes`.
+`passes`.[^unnecessary-check]
+
+[^unnecessary-check]: It turns out that checking `clicks >= clicks_to_next_zero`
+is unnecessary; if the condition is untrue (i.e. no passes occur), the formula
+will indeed evaluate to 0.
 
 ```py title="2025\day01\solution.py" ins={9-14,16}
 ...
