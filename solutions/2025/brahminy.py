@@ -13,7 +13,7 @@ Progress:
 | Day | Pt1 | Pt2 |
 | --- | --- | --- |
 |  01 |  Y  |  Y  |
-|  02 |  N  |  N  |
+|  02 |  Y  |  Y  |
 |  03 |  N  |  N  |
 |  04 |  N  |  N  |
 |  05 |  N  |  N  |
@@ -29,7 +29,7 @@ Progress:
 # NOTE Make sure your input files exist at these locations. (Also, this
 # part technically makes this program not a "one-liner", but the input
 # file locations could easily be hardcoded.)
-y = {
+z = {
     1: r"day01/input.txt",
     2: r"day02/input.txt",
     3: r"day03/input.txt",
@@ -45,4 +45,4 @@ y = {
 }
 
 # THE BRAHMINY
-print(*(lambda A:((a:=50)and"Day 1:",*map(sum,zip(*([abs(d*(a<1)+((e:=a+c-2*c*d)-d)//100),(a:=e%100)<1][::-1]for c,d in A)))))([(int(a[1:]),"R">a)for a in open(y[1])]))
+(lambda it,re:print(*(lambda A:((a:=50)and"Day 1:",*map(sum,zip(*([abs(d*(a<1)+((b:=a+c-2*c*d)-d)//100),(a:=b%100)<1][::-1]for c,d in A)))))([(int(a[1:]),"R">a)for a in open(z[1])]),*(lambda B:("\nDay 2:",*(sum(a for a in it.chain(*B)if re.match(fr"^(.+)\1{b}$",str(a)))for b in("","+"))))([{*(a:=[*map(int,b.split("-"))]),*range(*a)}for b in open(z[2]).read().split(",")])))(__import__("itertools"),__import__("re"))
