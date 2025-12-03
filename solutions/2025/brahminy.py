@@ -14,7 +14,7 @@ Progress:
 | --- | --- | --- |
 |  01 |  Y  |  Y  |
 |  02 |  Y  |  Y  |
-|  03 |  N  |  N  |
+|  03 |  Y  |  Y  |
 |  04 |  N  |  N  |
 |  05 |  N  |  N  |
 |  06 |  N  |  N  |
@@ -45,4 +45,4 @@ z = {
 }
 
 # THE BRAHMINY
-(lambda it,re:print(*(lambda A:((a:=50)and"Day 1:",*map(sum,zip(*([abs(d*(a<1)+((b:=a+c-2*c*d)-d)//100),(a:=b%100)<1][::-1]for c,d in A)))))([(int(a[1:]),"R">a)for a in open(z[1])]),*(lambda B:("\nDay 2:",*(sum(a for a in it.chain(*B)if re.match(fr"^(.+)\1{b}$",str(a)))for b in("","+"))))([{*(a:=[*map(int,b.split("-"))]),*range(*a)}for b in open(z[2]).read().split(",")])))(__import__("itertools"),__import__("re"))
+(lambda it,re:print(*(lambda A:((a:=50)and"Day 1:",*map(sum,zip(*([abs(d*(a<1)+((b:=a+c-2*c*d)-d)//100),(a:=b%100)<1][::-1]for c,d in A)))))([(int(a[1:]),"R">a)for a in open(z[1])]),*(lambda B:("\nDay 2:",*(sum(a for a in it.chain(*B)if re.match(fr"^(.+)\1{b}$",str(a)))for b in("","+"))))([{*(a:=[*map(int,b.split("-"))]),*range(*a)}for b in open(z[2]).read().split(",")]),*(lambda C:("\nDay 3:",*(sum(int((a:=lambda b,c:c<2 and max(b)or(d:=max(b[:1-c]))+a(b[b.find(d)+1:],c-1))(b,c))for b in C)for c in(2,12))))([*map(str.strip,open(z[3]))])))(__import__("itertools"),__import__("re"))
