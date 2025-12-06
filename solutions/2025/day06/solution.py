@@ -48,6 +48,8 @@ class Solution(StrSplitSolution):
         def is_all_spaces(column: Sequence[str]) -> bool:
             return all(char == " " for char in column)
 
+        # NOTE The prompt explains that the ordering is right to left.
+        # It doesn't matter in this case, but I thought I'd be explicit.
         symbols = raw_symbols.split()[::-1]
         columns = list(zip(*raw_numbers))[::-1]
         number_groups = [
