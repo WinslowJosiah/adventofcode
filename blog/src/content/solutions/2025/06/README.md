@@ -13,7 +13,7 @@ should be to convert these math problems to a different, more familiar format.
 
 Once we have a list of the rows of our input, we can use
 [extended iterable unpacking](https://peps.python.org/pep-3132) to separate the
-rows into the top number rows and the bottom symbol rows.
+rows into the top number rows and the bottom symbol row.
 
 ```py title="2025\day06\solution.py"
 ...
