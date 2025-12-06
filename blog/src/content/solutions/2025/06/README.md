@@ -120,7 +120,7 @@ use case feels too much like a [special case](https://pep20.org/#special) to me.
 ```
 
 So in our calculation loop, we can use `reduce` with the correct operators to
-get our answers, and then tally them up.
+get our answers, and then add them to our grand total.
 
 ```py title="2025\day06\solution.py" ins={1-3, 5-8, 16-17}
 from collections.abc import Callable
