@@ -263,7 +263,7 @@ Then, for each row after the first one, we update the beams/timeline counts. For
 a beam-split to occur in a certain column, two things need to be true:
 
 1. That column's character in the row is a splitter (`^`).
-2. This column will be reached by _any_ timelines.
+2. That column will be reached by _any_ timelines.
 
 If those conditions aren't both true, we can ignore this column. Otherwise, the
 beams there will have to split, which requires three steps:
@@ -277,6 +277,12 @@ timeline count of this column.[^overwrite-timelines]
 [^overwrite-timelines]: The one flaw with this approach as-is is that it would
 overwrite some timelines if two splitters were directly next to each other. This
 doesn't happen in the input, though, so that's okay.
+
+    If we wanted to account for this, we could initialize a separate list to
+    store the _new_ timeline states, and then only store them back to the
+    _original_ timeline states after the row is done processing. I considered
+    doing that anyway for the [purity](https://pep20.org/#practicality) of it --
+    but again, this scenario doesn't happen in the input.
 
 ```py title="2025\day07\solution.py"
 class Solution(StrSplitSolution):
