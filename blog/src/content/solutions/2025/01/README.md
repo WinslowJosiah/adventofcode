@@ -128,6 +128,7 @@ class Solution(StrSplitSolution):
             else:
                 clicks_to_next_zero = 100 - dial
             ...
+        ...
 ```
 
 :::tip
@@ -148,12 +149,14 @@ reached exactly, and we can use our formula from before to increase a tally of
 is unnecessary; if the condition is untrue (i.e. no passes occur), the formula
 will indeed evaluate to 0.
 
-```py title="2025\day01\solution.py" ins={9-14,16}
+```py title="2025\day01\solution.py" ins={11-16,18}
 ...
 
 class Solution(StrSplitSolution):
     def solve(self) -> tuple[int, int]:
         ...
+        for direction, clicks in rotations:
+            ...
             # Rotate the dial
             dial = (dial + direction * clicks) % 100
 

@@ -137,6 +137,7 @@ class Solution(StrSplitSolution):
             if not accessible_points:
                 break
             ...
+        ...
 ```
 
 Then we need to tally up those accessible paper rolls, and remove them from the

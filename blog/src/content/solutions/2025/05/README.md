@@ -122,6 +122,7 @@ class Solution(StrSplitSolution):
         # Loop through ranges in ascending order
         for right in sorted(ranges, key=attrgetter("start")):
             ...
+        ...
 ```
 
 :::note
