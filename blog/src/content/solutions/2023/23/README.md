@@ -53,10 +53,10 @@ def get_moves_from(grid: Grid[str], point: GridPoint) -> list[GridPoint]:
 
 The problem we're being asked to solve -- the ["longest path problem"](https://en.wikipedia.org/wiki/Longest_path_problem)
 -- is known to _not_ have an efficient algorithm to solve it in general.[^longest-path-problem-dag]
-But even though we can't do much speed up the search, we _can_ make the search
-space a bit smaller. Most of the grid consists of long hallways with only one
-path forward, so we can precalculate the distances along each of those hallways
-so we end up with way fewer nodes to search through.
+But even though we can't do much to speed up the search, we _can_ make the
+search space a bit smaller. Most of the grid consists of long hallways with only
+one path forward, so we can precalculate the distances along each of those
+hallways so we end up with way fewer nodes to search through.
 
 [^longest-path-problem-dag]: An efficient algorithm _is_ known for
 [directed acyclic graphs](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
