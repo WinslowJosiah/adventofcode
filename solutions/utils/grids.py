@@ -300,8 +300,6 @@ class Direction(IntEnum):
 
         Parameters
         ----------
-        facing :
-            Initial direction.
         towards : {'CCW', 'CW'}
             Rotation to apply (`CCW` for counterclockwise, `CW` for
             clockwise).
@@ -319,7 +317,12 @@ class Direction(IntEnum):
     @property
     def offset(self) -> GridPoint:
         """
-        The `GridPoint` representing this direction.
+        The `GridPoint` representing the offset for this direction.
+
+        Returns
+        -------
+        GridPoint
+            Offset for this direction.
         """
         return _ROW_COLUMN_OFFSETS[self]
 
