@@ -167,7 +167,7 @@ timelines that reached it.
 2. Each "next" beam will be reached by every timeline that reached the "current"
 beam, so we want to update the timeline count at the "next" beam's point.
 
-```py title="2025\day07\solution.py"
+```py title="2025\day07\solution.py" ins={9,11,14-16,23} ins=", num_bottom_timelines"
 ...
 
 class Solution(StrSplitSolution):
