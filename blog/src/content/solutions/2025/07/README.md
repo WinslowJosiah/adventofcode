@@ -195,4 +195,114 @@ class Solution(StrSplitSolution):
 ```
 
 Finally, the number of timelines that reached the bottom can be calculated with
-a `sum` of a simple generator. Another fun use of my `Position` class!
+a `sum` of a simple generator.
+
+This gets us an answer in about 13.7 milliseconds on my machine -- not bad! But
+can we do better?
+
+### Bonus
+
+When I shared the above solution [on Reddit](https://reddit.com/comments/1pg9w66/comment/nsqpjzk),
+a user named `u/4HbQ`[^4hbq] asked me the following question:
+
+[^4hbq]: His Advent of Code solutions are always very terse, and often contain
+brilliant insights. He shares his solutions in the `r/adventofcode` subreddit
+(instead of on GitHub or similar), and [his latest solution comment](https://reddit.com/comments/1pg9w66/comment/nspwfu4)
+contains links to all of his 2025 solutions up to Day 7. I would definitely
+recommend checking them out!
+
+> Love your write-up (as usual!), but don't you think you're kind of
+> overcomplicating things by using BFS and those classes?
+
+For the most part, I write my solutions _before_ seeing anybody else's code, and
+I avoid checking out other people's approaches unless I get stuck; after all, I
+like the satisfaction of coming up with an approach _myself_. But sometimes my
+first idea isn't my best; for a good example, see my [initial solution](https://github.com/WinslowJosiah/adventofcode/blob/3e7da8bc196cf422101f7512c41ef3516c735846/aoc/2023/day10/__init__.py)
+versus my [new solution](https://github.com/WinslowJosiah/adventofcode/blob/main/solutions/2023/day10/solution.py)
+to 2023 Day 10.
+
+The `Position` class from my [`grids` module](https://github.com/WinslowJosiah/adventofcode/tree/main/solutions/utils/grids.py)
+certainly offset my cognitive load -- I thought less about "how do I represent
+these beams?" and more about "how do I manipulate these beams to get the
+answers?". I think it's a good general abstraction for that reason, and that's
+why my first thought today was to reach for that class.
+
+But after checking out other people's solutions in [the Reddit megathread](https://reddit.com/comments/1pg9w66),
+I found a somewhat common and pretty clever approach that avoids any such fancy
+classes, and _doesn't even require thinking of the input as a grid_. I'll be
+adapting that approach below.
+
+---
+
+As the beams move downward, they're not doing anything fancy: they're going down
+each row, one by one, one beam (in multiple timelines) per column. This means we
+can store beams/timeline counts in something like a `list` or a `dict`, with
+each entry corresponding to one beam in one column, and updating the timeline
+counts as we go down each row.
+
+I'll go with a `list` for this, as it ends up being faster than using a `dict`.
+We can quickly initialize a list of all zeros by multiplying `[0]` by the number
+of entries we want, and then we can set the starting column as being reached in
+one timeline so far.
+
+```py title="2025\day07\solution.py"
+class Solution(StrSplitSolution):
+    def solve(self) -> tuple[int, int]:
+        first_row, *last_rows = self.input
+        start = first_row.index("S")
+
+        num_splits = 0
+        # Keep track of the number of timelines in which a beam reaches
+        # each column
+        timelines = [0] * len(first_row)
+        timelines[start] = 1
+        ...
+```
+
+Then, for each row after the first one, we update the beams/timeline counts. For
+a beam-split to occur in a certain column, two things need to be true:
+
+1. That column's character in the row is a splitter (`^`).
+2. This column will be reached by _any_ timelines.
+
+If those conditions aren't both true, we can ignore this column. Otherwise, the
+beams there will have to split, which requires three steps:
+
+1. To tally it, we add 1 to `num_splits`.
+2. To perform the split, we add the timeline count of this column to the
+timeline counts of the adjacent columns.
+3. To prevent any beams from continuing down the same column, we zero out the
+timeline count of this column.[^overwrite-timelines]
+
+[^overwrite-timelines]: The one flaw with this approach as-is is that it would
+overwrite some timelines if two splitters were directly next to each other. This
+doesn't happen in the input, though, so that's okay.
+
+```py title="2025\day07\solution.py"
+class Solution(StrSplitSolution):
+        ...
+        for row in last_rows:
+            for col, char in enumerate(row):
+                # The timelines will only change when any timeline
+                # reaches a splitter
+                if not (char == "^" and timelines[col]):
+                    continue
+
+                num_splits += 1
+                # Split this column's timelines to both sides
+                timelines[col - 1] += timelines[col]
+                timelines[col + 1] += timelines[col]
+                # No timelines will continue in this column
+                # HACK This overwrites beams in the case of two adjacent
+                # splitters, but that never happens in the input.
+                timelines[col] = 0
+
+        return num_splits, sum(timelines)
+```
+
+From there, we can return the number of splits for Part 1, and the sum of the
+currently active timelines for Part 2.
+
+This gets us an answer in about 0.57 milliseconds on my machine -- _24 times
+faster_ than our previous approach -- and removes all dependencies! Very much
+worth a revisit in my book.
