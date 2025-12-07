@@ -101,12 +101,12 @@ class Solution(StrSplitSolution):
         # At top-left corner, facing right
         beams: list[Beam] = [Beam((0, 0), Direction.RIGHT)]
         while beams:
-            current = beams.pop()
-            if current in seen:
+            current_beam = beams.pop()
+            if current_beam in seen:
                 continue
-            seen.add(current)
+            seen.add(current_beam)
 
-            for next_beam in current.next_beams(grid[current.point]):
+            for next_beam in current_beam.next_beams(grid[current_beam.point]):
                 if next_beam.point in grid:
                     beams.append(next_beam)
 
