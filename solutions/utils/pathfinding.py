@@ -294,6 +294,7 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
     )
 
 
+# REVIEW Do I actually need this function?
 def find_reachable_nodes[Node, State: PathState[Node]](  # pyright: ignore[reportGeneralTypeIssues]
         start_states: Iterable[State],  # must be non-empty
         *,
