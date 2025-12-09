@@ -209,9 +209,10 @@ We can easily write a function that uses this formula, which I also put in my
 `grids` module.
 
 ```py title="utils\grids.py"
+from collections.abc import Sequence
 from itertools import pairwise
 
-def interior_area(points: list[GridPoint]) -> float:
+def interior_area(points: Sequence[GridPoint]) -> float:
     # NOTE The "shoelace formula" requires a circular list of vertices.
     padded_points = [*points, points[0]]
     return abs(sum(

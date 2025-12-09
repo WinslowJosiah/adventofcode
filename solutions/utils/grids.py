@@ -1,4 +1,4 @@
-from collections.abc import Callable, Iterable, Iterator
+from collections.abc import Callable, Iterable, Iterator, Sequence
 from enum import IntEnum
 from itertools import pairwise, product
 from typing import Literal, NamedTuple, Self
@@ -250,7 +250,7 @@ def parse_grid[Item](
     return result
 
 
-def interior_area(points: list[GridPoint]) -> float:
+def interior_area(points: Sequence[GridPoint]) -> float:
     """
     Return the interior area of a simple polygon with grid points as its
     vertices.
