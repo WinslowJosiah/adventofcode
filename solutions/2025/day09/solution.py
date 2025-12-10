@@ -53,9 +53,9 @@ def rectangle_in_polygon(
         return False
 
     # HACK Here, we check that no edge of the polygon goes inside the
-    # rectangle. This is technically incorrect - if two adjacent polygon
-    # edges go inside the rectangle, no rectangle point would be outside
-    # the polygon - but that edge case doesn't happen in our input.
+    # rectangle. This is technically incorrect - two adjacent, parallel
+    # polygon edges would make the check fail even if no rectangle point
+    # is "outside" - but that edge case doesn't happen in our input.
     padded_polygon = [*polygon, polygon[0]]
     for (px1, py1), (px2, py2) in pairwise(padded_polygon):
         # Sort polygon X and Y values
