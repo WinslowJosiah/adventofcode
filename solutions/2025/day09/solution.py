@@ -15,12 +15,11 @@ def point_in_polygon(point: GridPoint, polygon: tuple[GridPoint, ...]) -> bool:
 
     # Check if point is exactly on an edge (which counts as inside)
     for (x1, y1), (x2, y2) in pairwise(padded_polygon):
-        assert x1 == x2 or y1 == y2, "polygon is not axis-aligned"
         # Vertical edge
-        if x1 == x and min(y1, y2) <= y <= max(y1, y2):
+        if x1 == x2 == x and min(y1, y2) <= y <= max(y1, y2):
             return True
         # Horizontal edge
-        if y1 == y and min(x1, x2) <= x <= max(x1, x2):
+        if y1 == y2 == y and min(x1, x2) <= x <= max(x1, x2):
             return True
 
     # NOTE Consider a horizontal ray going rightward from the point, and
@@ -59,7 +58,6 @@ def rectangle_in_polygon(
     # the polygon - but that edge case doesn't happen in our input.
     padded_polygon = [*polygon, polygon[0]]
     for (px1, py1), (px2, py2) in pairwise(padded_polygon):
-        assert px1 == px2 or py1 == py2, "polygon is not axis-aligned"
         # Sort polygon X and Y values
         (px1, px2), (py1, py2) = sorted([px1, px2]), sorted([py1, py2])
         # Check if this polygon edge overlaps the rectangle's interior
@@ -90,6 +88,45 @@ def rectangle_area(corners: tuple[GridPoint, GridPoint]) -> int:
     return (abs(x2 - x1) + 1) * (abs(y2 - y1) + 1)
 
 
+def assert_polygon_is_valid(polygon: tuple[GridPoint, ...]):
+    padded_polygon = [*polygon, polygon[0]]
+
+    # Assert that all edges are axis-aligned, and they follow an
+    # alternating pattern of vertical/horizontal edges
+    (x1, y1), (x2, y2), *_ = padded_polygon
+    if x1 == x2:
+        vertical = True
+    elif y1 == y2:
+        vertical = False
+    else:
+        raise ValueError("polygon is not axis-aligned")
+    for edge in pairwise(padded_polygon):
+        (x1, y1), (x2, y2) = edge
+        assert x1 == x2 if vertical else y1 == y2, (
+            f"{edge} should be "
+            f"{'vertical' if vertical else 'horizontal'} but is not"
+        )
+        vertical = not vertical
+
+    # Assert that no two parallel edges are directly adjacent
+    for edge1, edge2 in combinations(pairwise(padded_polygon), 2):
+        (x1, y1), (x2, y2) = edge1
+        (x3, y3), (x4, y4) = edge2
+        # Sort X and Y values
+        (x1, x2), (x3, x4) = sorted([x1, x2]), sorted([x3, x4])
+        (y1, y2), (y3, y4) = sorted([y1, y2]), sorted([y3, y4])
+
+        if x1 == x2 and x3 == x4:
+            assert not (abs(x1 - x3) <= 1 and y1 < y4 and y3 < y2), (
+                f"{edge1} and {edge2} are vertical, parallel, and "
+                "adjacent but shouldn't be"
+            )
+        elif y1 == y2 and y3 == y4:
+            assert not (abs(y1 - y3) <= 1 and x1 < x4 and x3 < x2), (
+                f"{edge1} and {edge2} are horizontal, parallel, and "
+                "adjacent but shouldn't be"
+            )
+
 class Solution(StrSplitSolution):
     """
     Solution for Advent of Code 2025 Day 9.
@@ -105,12 +142,9 @@ class Solution(StrSplitSolution):
             cast(GridPoint, tuple(map(int, line.split(","))))
             for line in self.input
         )
-        # HACK This enforces an assumption made in rectangle_in_polygon.
-        padded_points = [*points, points[0]]
-        assert all(
-            abs(x2 - x1) > 1 or abs(y2 - y1) > 1
-            for (x1, y1), (x2, y2) in pairwise(padded_points)
-        ), "some edges are too close together"
+        # HACK This solution only works if we enforce some assumptions -
+        # some explicit in the prompt, some imposed by me.
+        assert_polygon_is_valid(points)
 
         max_area, max_contained_area = 0, 0
         for corners in combinations(points, 2):
