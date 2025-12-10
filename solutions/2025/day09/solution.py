@@ -71,7 +71,7 @@ def rectangle_in_polygon(
     # in our input, but doesn't affect our answer because it's so thin;
     # nevertheless, if we have a big enough rectangle, we also check the
     # corners of its "inner region" (without the boundary) to make sure.
-    if abs(rx1 - rx2) > 1 and abs(ry1 - ry2) > 1:
+    if rx2 - rx1 > 1 and ry2 - ry1 > 1:
         inner_region = (
             (rx1 + 1, ry1 + 1),
             (rx2 - 1, ry1 + 1),
