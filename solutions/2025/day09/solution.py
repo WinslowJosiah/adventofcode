@@ -15,11 +15,7 @@ def point_in_polygon(point: GridPoint, polygon: tuple[GridPoint, ...]) -> bool:
 
     # Check if point is exactly on an edge (which counts as inside)
     for (x1, y1), (x2, y2) in pairwise(padded_polygon):
-        # Vertical edge
-        if x1 == x2 == x and min(y1, y2) <= y <= max(y1, y2):
-            return True
-        # Horizontal edge
-        if y1 == y2 == y and min(x1, x2) <= x <= max(x1, x2):
+        if min(x1, x2) <= x <= max(x1, x2) and min(y1, y2) <= y <= max(y1, y2):
             return True
 
     # NOTE Consider a horizontal ray going rightward from the point, and
