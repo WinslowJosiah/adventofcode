@@ -3,7 +3,7 @@ year: 2025
 day: 9
 title: "Movie Theater"
 slug: 2025/day/9
-# pub_date: "2025-12-10"
+pub_date: "2025-12-10"
 # concepts: []
 ---
 ## Part 1
