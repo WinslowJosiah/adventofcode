@@ -66,6 +66,21 @@ def rectangle_in_polygon(
         if px1 < rx2 and rx1 < px2 and py1 < ry2 and ry1 < py2:
             return False
 
+    # HACK The preceding tests will incorrectly say the empty inside of
+    # a horseshoe-like shape is "inside" the polygon. This shape occurs
+    # in our input, but doesn't affect our answer because it's so thin;
+    # nevertheless, if we have a big enough rectangle, we also check the
+    # corners of its "inner region" (without the boundary) to make sure.
+    if abs(rx1 - rx2) > 1 and abs(ry1 - ry2) > 1:
+        inner_region = (
+            (rx1 + 1, ry1 + 1),
+            (rx2 - 1, ry1 + 1),
+            (rx2 - 1, ry2 - 1),
+            (rx1 + 1, ry2 - 1),
+        )
+        if not all(point_in_polygon(point, polygon) for point in inner_region):
+            return False
+
     return True
 
 
