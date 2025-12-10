@@ -49,8 +49,8 @@ def rectangle_in_polygon(
     (rx1, rx2), (ry1, ry2) = sorted([rx1, rx2]), sorted([ry1, ry2])
 
     rectangle = ((rx1, ry1), (rx2, ry1), (rx2, ry2), (rx1, ry2))
-    # This rectangle's corners should be inside the polygon
-    if not all(point_in_polygon(point, polygon) for point in rectangle):
+    # Check if this rectangle's corners are all inside the polygon
+    if not all(point_in_polygon(p, polygon) for p in rectangle):
         return False
 
     # HACK Here, we check that no edge of the polygon goes inside the
@@ -62,23 +62,24 @@ def rectangle_in_polygon(
         assert px1 == px2 or py1 == py2, "polygon is not rectilinear"
         # Sort polygon X and Y values
         (px1, px2), (py1, py2) = sorted([px1, px2]), sorted([py1, py2])
-        # This polygon edge should not be inside the rectangle
+        # Check if this polygon edge overlaps the rectangle's interior
+        # (which happens if its X ranges and Y ranges intersect)
         if px1 < rx2 and rx1 < px2 and py1 < ry2 and ry1 < py2:
             return False
 
     # HACK The preceding tests will incorrectly say the empty inside of
     # a horseshoe-like shape is "inside" the polygon. This shape occurs
     # in our input, but doesn't affect our answer because it's so thin;
-    # nevertheless, if we have a big enough rectangle, we also check the
-    # corners of its "inner region" (without the boundary) to make sure.
+    # nevertheless, to detect it, we also check the rectangle's "inner
+    # corners" (if it is big enough to have any).
     if rx2 - rx1 > 1 and ry2 - ry1 > 1:
-        inner_region = (
+        inner_corners = (
             (rx1 + 1, ry1 + 1),
             (rx2 - 1, ry1 + 1),
             (rx2 - 1, ry2 - 1),
             (rx1 + 1, ry2 - 1),
         )
-        if not all(point_in_polygon(point, polygon) for point in inner_region):
+        if not all(point_in_polygon(p, polygon) for p in inner_corners):
             return False
 
     return True
