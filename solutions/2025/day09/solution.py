@@ -108,7 +108,7 @@ class Solution(StrSplitSolution):
         # HACK This enforces an assumption made in rectangle_in_polygon.
         padded_points = [*points, points[0]]
         assert all(
-            abs(x2 - x1) >= 2 or abs(y2 - y1) >= 2
+            abs(x2 - x1) > 1 or abs(y2 - y1) > 1
             for (x1, y1), (x2, y2) in pairwise(padded_points)
         ), "some edges are too close together"
 
