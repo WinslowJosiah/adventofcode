@@ -97,10 +97,7 @@ we calculate the areas of each new rectangle, we will manually keep track of
 both answers -- one being the maximum rectangle area, and one being the maximum
 rectangle area area that is _contained within the polygon_.
 
-```py title="2025\day09\solution.py" /(rectangle_in_polygon)\\(/ ins=", pairwise" ins={10-12,14-21,23}
-from itertools import combinations, pairwise
-...
-
+```py title="2025\day09\solution.py" /(rectangle_in_polygon)\\(/ ins={7-9,11-18,20}
 class Solution(StrSplitSolution):
     def solve(self) -> tuple[int, int]:
         points = tuple(
@@ -173,7 +170,9 @@ pair of connected points with [`itertools.pairwise`](https://docs.python.org/3/l
 Then we need to check if any part of the edge is strictly inside the rectangle;
 if it is, we can return `False`.
 
-```py title="2025\day09\solution.py"
+```py title="2025\day09\solution.py" ins={1}
+from itertools import pairwise
+
 def rectangle_in_polygon(
         corners: tuple[GridPoint, GridPoint],
         polygon: tuple[GridPoint, ...],
