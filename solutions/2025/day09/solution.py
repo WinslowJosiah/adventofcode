@@ -15,7 +15,7 @@ def point_in_polygon(point: GridPoint, polygon: tuple[GridPoint, ...]) -> bool:
 
     # Check if point is exactly on an edge (which counts as inside)
     for (x1, y1), (x2, y2) in pairwise(padded_polygon):
-        assert x1 == x2 or y1 == y2, "polygon is not rectilinear"
+        assert x1 == x2 or y1 == y2, "polygon is not axis-aligned"
         # Vertical edge
         if x1 == x and min(y1, y2) <= y <= max(y1, y2):
             return True
@@ -59,7 +59,7 @@ def rectangle_in_polygon(
     # the polygon - but that edge case doesn't happen in our input.
     padded_polygon = [*polygon, polygon[0]]
     for (px1, py1), (px2, py2) in pairwise(padded_polygon):
-        assert px1 == px2 or py1 == py2, "polygon is not rectilinear"
+        assert px1 == px2 or py1 == py2, "polygon is not axis-aligned"
         # Sort polygon X and Y values
         (px1, px2), (py1, py2) = sorted([px1, px2]), sorted([py1, py2])
         # Check if this polygon edge overlaps the rectangle's interior
