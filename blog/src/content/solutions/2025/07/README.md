@@ -207,9 +207,9 @@ a user named `u/4HbQ`[^4hbq] asked me the following question:
 
 [^4hbq]: His Advent of Code solutions are always very terse, and often contain
 brilliant insights. He shares his solutions in the `r/adventofcode` subreddit
-(instead of on GitHub or similar), and [his latest solution comment](https://reddit.com/comments/1pg9w66/comment/nspwfu4)
-contains links to all of his 2025 solutions up to Day 7. I would definitely
-recommend checking them out!
+(instead of on GitHub or similar), and [this solution comment of his](https://reddit.com/comments/1pkje0o/comment/ntlkg9i)
+contains links to all of his 2025 solutions. I would definitely recommend
+checking them out!
 
 > Love your write-up (as usual!), but don't you think you're kind of
 > overcomplicating things by using BFS and those classes?
