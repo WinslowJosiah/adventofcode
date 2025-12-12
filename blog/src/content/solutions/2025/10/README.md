@@ -3,7 +3,7 @@ year: 2025
 day: 10
 title: "Factory"
 slug: 2025/day/10
-pub_date: "2025-12-11"
+pub_date: "2025-12-12"
 # concepts: [recursion]
 ---
 ## Part 1
