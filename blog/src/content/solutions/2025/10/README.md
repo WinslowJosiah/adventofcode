@@ -322,7 +322,7 @@ them.
 - Because it may be the case that some joltage targets are impossible to reach,
 we should return some default value in those cases. I used `None` because it's
 the [obvious](https://pep20.org/#obvious) way to signify "no result".[^infinity]
-- Plenty of recursive calls will be repeated, especially at the depeest levels
+- Plenty of recursive calls will be repeated, especially at the deepest levels
 of recursion. Decorating our recursive function with [`functools.cache`](https://docs.python.org/3/library/functools.html#functools.cache)
 will improve the runtime.
 
