@@ -9,21 +9,25 @@ https://github.com/WinslowJosiah
 Inspired by Sav Bell's programs "The Beast" and "The Basilisk"!
 https://github.com/savbell/advent-of-code-one-liners
 
-Progress:
-| Day | Pt1 | Pt2 |
-| --- | --- | --- |
-|  01 |  Y  |  Y  |
-|  02 |  Y  |  Y  |
-|  03 |  Y  |  Y  |
-|  04 |  Y  |  Y  |
-|  05 |  Y  |  Y  |
-|  06 |  Y  |  Y  |
-|  07 |  Y  |  Y  |
-|  08 |  Y  |  Y  |
-|  09 |  Y  |  Y  |
-|  10 |  Y  |  Y  |
-|  11 |  Y  |  Y  |
-|  12 |  Y  | N/A |
+Size breakdown (not counting the `z` input filename dict):
+|  Section  | Size |
+| :-------: | ---: |
+|   start   |  110 |
+|  Day 01   |  147 |
+|  Day 02   |  169 |
+|  Day 03   |  163 |
+|  Day 04   |  228 |
+|  Day 05   |  186 |
+|  Day 06   |  236 |
+|  Day 07   |  149 |
+|  Day 08   |  278 |
+|  Day 09   |  310 |
+|  Day 10   |  298 |
+|  Day 11   |  159 |
+|  Day 12   |   99 |
+|    end    |  104 |
+|  commas   |   11 |
+| **TOTAL** | 2647 |
 """
 
 # NOTE Make sure your input files exist at these locations. (Also, this
