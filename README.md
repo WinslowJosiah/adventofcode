@@ -93,6 +93,6 @@ or [my email](mailto:winslowjosiah@gmail.com).
     - [ ] 2022
     - [x] 2023
     - [ ] 2024 _(have solved; have not explained on new blog)_
-    - [ ] 2025
+    - [x] 2025
 - [ ] Automatically retrieve my puzzle input
 - [ ] Automatically submit my answers to the Advent of Code website
