@@ -1,45 +1,7 @@
-from argparse import ArgumentParser, ArgumentTypeError
-from collections.abc import Callable
+from argparse import ArgumentParser
 from pathlib import Path
-from typing import SupportsIndex
 
-
-def ranged_int(
-        start: SupportsIndex,
-        stop: SupportsIndex,
-) -> Callable[[str], int]:
-    """
-    Use as an argparse type to restrict an integer to a specific
-    (inclusive) range.
-
-    Parameters
-    ----------
-    start : int
-        Inclusive start of range.
-    stop : int
-        Inclusive end of range.
-
-    Returns
-    -------
-    callable
-        Function that checks whether a string is an integer within the
-        specified range.
-
-    Notes
-    -----
-    When used as an argparse type, an `argparse.ArgumentTypeError` is
-    raised if the value is not convertible to an integer, or the value
-    is not within the inclusive range from `start` to `stop`.
-    """
-    def checker(s: str) -> int:
-        try:
-            value = int(s)
-        except ValueError:
-            raise ArgumentTypeError("value not an integer")
-        if int(start) <= value <= int(stop):
-            return value
-        raise ArgumentTypeError(f"value not in range [{start}, {stop}]")
-    return checker
+from aoc import ranged_int
 
 
 PARSER = ArgumentParser(
