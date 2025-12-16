@@ -166,7 +166,9 @@ def main(
         files = [solution_path / INPUT_FILE]
 
     # Run solution on each input / test file
-    for file in files:
+    for i, file in enumerate(files):
+        if i > 0:
+            print()
         print(f"# {file.relative_to(solution_path.parent.parent)}")
         print()
         solution.read_input_file(file)
