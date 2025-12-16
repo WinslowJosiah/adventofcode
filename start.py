@@ -64,6 +64,12 @@ def main(year: int, day: int):
     day_dir = Path(year_dir, f"day{day:02}")
     day_dir.mkdir(parents=True, exist_ok=True)
 
+    # Create input and test files
+    Path(day_dir, "input.txt").touch()
+    # NOTE If any test files already exist, we won't create a new one.
+    if not any(day_dir.glob("test*.txt")):
+        Path(day_dir, "test.txt").touch()
+
     # Create solution file
     solution_path = Path(day_dir, "solution.py")
     if solution_path.exists():
@@ -77,12 +83,6 @@ def main(year: int, day: int):
         .replace("{{day}}", str(day))
     )
     solution_path.write_text(replaced_template)
-
-    # Create input and test files
-    Path(day_dir, "input.txt").touch()
-    # NOTE If any test files already exist, we won't create a new one.
-    if not any(day_dir.glob("test*.txt")):
-        Path(day_dir, "test.txt").touch()
 
     print(f"AoC {year} Day {day} initialized at: {day_dir}")
 
