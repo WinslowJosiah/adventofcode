@@ -4,6 +4,8 @@
 .vscode
 # Puzzle input
 solutions/*/day*/input.txt
+# Config file (with session cookie)
+config.ini
 # The Drakaina (2024), before being one-line-ified
 drakaina_formatted.py
 # The Brahminy (2025), before being one-line-ified
