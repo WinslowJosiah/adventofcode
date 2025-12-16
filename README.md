@@ -94,5 +94,5 @@ or [my email](mailto:winslowjosiah@gmail.com).
     - [x] 2023
     - [ ] 2024 _(have solved; have not explained on new blog)_
     - [x] 2025
-- [ ] Automatically retrieve my puzzle input
+- [x] Automatically retrieve my puzzle input
 - [ ] Automatically submit my answers to the Advent of Code website
