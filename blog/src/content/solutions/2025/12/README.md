@@ -161,6 +161,6 @@ solves _every_ AoC 2025 puzzle in a _single_ line of Python. I'm calling it
 it this way, but I'm doing it as a challenge to myself, and I've personally been
 having fun writing it.
 
-I hope to get done with it by Christmas; at the moment, I have one-line
-solutions to every puzzle up to Day 7. If you're into that sort of thing, be
-sure to check it out!
+I was able to finish it by December 13th; it has solutions to every 2025 puzzle
+from Day 1 to Day 12. If you're into that sort of thing, be sure to check it
+out!
