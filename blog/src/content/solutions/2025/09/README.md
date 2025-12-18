@@ -12,9 +12,9 @@ The elves want help with interior decorating today. I don't have much of an eye
 for style, but I'll do what I can!
 
 Input parsing is super easy for this puzzle -- so easy, in fact, that one could
-just use [eval()](https://docs.python.org/3/library/functions.html#eval) if one
-were so inclined[^used-eval] (which I am not). But here, let's just write some
-more safe and standard parsing code.
+just use [`eval()`](https://docs.python.org/3/library/functions.html#eval) if
+one were so inclined[^used-eval] (which I am not). But here, let's just write
+some more safe and standard parsing code.
 
 [^used-eval]: And [some were](https://reddit.com/comments/1phywvn/comment/nt6jiwb)!
 

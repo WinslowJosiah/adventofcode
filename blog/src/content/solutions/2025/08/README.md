@@ -171,7 +171,7 @@ figure out Part 2 rather quickly. All it takes to turn the solution into a
 unified `solve` function is a few changes.
 
 - Instead of looking at the first 1,000 pairs, we want to keep looking at pairs
-until we get answer for both Parts 1 and 2. (We can just calculate Part 1's
+until we get answers for both Parts 1 and 2. (We can just calculate Part 1's
 answer the moment we reach the 1,000th pair.)
 - Once every box is connected into a single circuit, the `UnionFind.set_sizes`
 property will return a list with only one item; at that point, we can calculate
