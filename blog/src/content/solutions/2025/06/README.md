@@ -253,7 +253,7 @@ making the group, and `group` is the group itself as an iterator.
 ```py
 >>> from itertools import groupby
 >>> data = "abc.de..f...ghi"
->>> is_dot = lambda ch: ch == " "
+>>> is_dot = lambda ch: ch == "."
 >>> [(key, list(group)) for key, group in groupby(data, key=is_dot)]
 [(False, ['a', 'b', 'c']),
  (True, ['.']),
