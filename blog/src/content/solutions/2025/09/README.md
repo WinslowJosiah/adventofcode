@@ -250,10 +250,10 @@ outside, the original point was _outside_.
 - If the ray does an _odd_ number of edge crossings before reaching the outside,
 the original point was _inside_.
 
-The only case that would difficult to check for with this algorithm is a point
-that's exactly on the boundary. But that's okay; we can just explicity check for
-that condition first, and return `True` if our point lies within the bounds of
-the edge coordinates.[^point-on-boundary]
+The only case that would be difficult to check for with this algorithm is a
+point that's exactly on the boundary. But that's okay; we can just explicitly
+check for that condition first, and return `True` if our point lies within the
+bounds of the edge coordinates.[^point-on-boundary]
 
 [^point-on-boundary]: What the code actually checks is if our point is within
 a _rectangle_ defined by the minimum and maximum X and Y values of the edge.
