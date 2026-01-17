@@ -26,7 +26,7 @@ How many different paths lead from `you` to `out`? I was a bit worried I'd have
 to break out my [`pathfinding` module](https://github.com/WinslowJosiah/adventofcode/blob/main/solutions/utils/pathfinding.py)
 to find out, but I didn't have to; the input is a [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
 (directed acyclic graph), so a simpler path-counting approach is possible.
-Recursion was a lifesafer on [Day 10](/solutions/2025/day/10), so let's use the
+Recursion was a lifesaver on [Day 10](/solutions/2025/day/10), so let's use the
 following recursive algorithm:
 
 - **Base case**: If this device _is_ the ending device, there is exactly 1 path
