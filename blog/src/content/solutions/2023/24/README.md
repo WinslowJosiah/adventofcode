@@ -86,7 +86,7 @@ numbers have a limited precision, which can make [some calculations](https://0.3
 slightly inaccurate. (Though unless you have a specific reason to use `Decimal`
 or `Fraction` instead, this is fine.)
 - A `decimal.Decimal` is stored as a series of decimal digits with some
-precision - 28 places by default - and arithmetic on `Decimal` objects works
+precision -- 28 places by default -- and arithmetic on `Decimal` objects works
 basically like you'd expect. However, they are much slower to use than `float`s.
 - A `fractions.Fraction` is stored as a numerator and denominator, and
 arithmetic on `Fraction` objects is arbitrary-precision and exact. However, they
