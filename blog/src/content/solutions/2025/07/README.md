@@ -134,7 +134,7 @@ beams would be overwritten and lost.)
 3. To stop a split beam from continuing down its original column, we want to
 store 0 there instead of `False`.
 
-```py title="2025\day07\solution.py" ins="solve" ins="tuple[int, int]" ins=/\\[(0)\\]/ ins=/beams\\[start\\] = (1)/ ins=/(\\+=) beams\\[col\\]/ ins=/beams\\[col\\] = (0)/ ins=", sum(beams)"
+```py title="2025\day07\solution.py" ins="solve" ins="tuple[int, int]" ins="the number of beams" ins=/\\[(0)\\]/ ins=/beams\\[start\\] = (1)/ ins=/(\\+=) beams\\[col\\]/ ins=/beams\\[col\\] = (0)/ ins=", sum(beams)"
 class Solution(StrSplitSolution):
     def solve(self) -> tuple[int, int]:
         first_row, *last_rows = self.input
