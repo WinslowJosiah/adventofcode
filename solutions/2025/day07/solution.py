@@ -16,24 +16,24 @@ class Solution(StrSplitSolution):
         start = first_row.index("S")
 
         num_splits = 0
-        # Keep track of the number of timelines in which a beam reaches
-        # each column
-        timelines = [0] * len(first_row)
-        timelines[start] = 1
+        # Keep track of the number of beams in each column
+        beams = [0] * len(first_row)
+        beams[start] = 1
+
         for row in last_rows:
             for col, char in enumerate(row):
-                # The timelines will only change when any timeline
-                # reaches a splitter
-                if not (char == "^" and timelines[col]):
+                # The beam states will only change when a beam reaches a
+                # splitter
+                if not (char == "^" and beams[col]):
                     continue
 
                 num_splits += 1
-                # Split this column's timelines to both sides
-                timelines[col - 1] += timelines[col]
-                timelines[col + 1] += timelines[col]
-                # No timelines will continue in this column
+                # Split this column's beam to both sides
+                beams[col - 1] += beams[col]
+                beams[col + 1] += beams[col]
+                # No beam will continue in this column
                 # HACK This overwrites beams in the case of two adjacent
                 # splitters, but that never happens in the input.
-                timelines[col] = 0
+                beams[col] = 0
 
-        return num_splits, sum(timelines)
+        return num_splits, sum(beams)
