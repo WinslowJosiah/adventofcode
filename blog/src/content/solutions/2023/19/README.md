@@ -266,7 +266,7 @@ def split_range(r: range, value: int) -> tuple[range, range]:
 
 Then, as each `RangedPart` is sent through the workflow, we split the ranges
 according to the rule, send the matching portion of the range to the
-corresponding destination, and update the `RangedPart` with non-matching
+corresponding destination, and update the `RangedPart` with the non-matching
 portion. The results are appended to the `ranges` list as we go along.
 
 Note that we need to be a little careful with how we split the ranges to avoid
