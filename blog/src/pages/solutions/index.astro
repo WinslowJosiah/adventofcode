@@ -9,7 +9,7 @@ const loadSolutions: () => Promise<Props[]> = async () => {
   const solutions = await getSolutionsByYear();
   return [...solutions.entries()]
     .map(([year, solutions]) => ({
-      year,
+      year: year,
       solutions: solutions.toSorted((a, b) => a.data.day - b.data.day),
     }))
     .sort((a, b) => b.year - a.year);

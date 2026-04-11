@@ -7,9 +7,9 @@ export const getStaticPaths = async () => {
   const years = await getSolutionsByYear();
 
   return [...years.entries()].map(([year, solutions]) => ({
-    params: { year },
+    params: { year: String(year) },
     props: {
-      year,
+      year: year,
       solutions: solutions.toSorted((a, b) => a.data.day - b.data.day),
     },
   }));

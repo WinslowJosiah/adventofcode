@@ -3,11 +3,12 @@ import { type Concept, getConcepts, getPublishedSolutions } from "../../utils/co
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Layout from "../../layouts/Layout.astro";
 import NavSolution from "../../components/NavSolution.astro";
+import { render } from "astro:content";
 
 export const getStaticPaths = async () => {
   const solutions = await getPublishedSolutions();
-  return solutions.map(({ slug, ...solution }) => ({
-    params: { slug },
+  return solutions.map(({ id, ...solution }) => ({
+    params: { slug: id },
     props: solution,
   }));
 };
@@ -15,7 +16,7 @@ export const getStaticPaths = async () => {
 const loadConceptsBySlug: () => Promise<Map<string, Concept>> = async () => {
   const concepts = await getConcepts();
   return concepts.reduce((result, concept) => {
-    result.set(concept.slug, concept);
+    result.set(concept.id, concept);
     return result;
   }, new Map<string, Concept>());
 };
@@ -23,7 +24,7 @@ const loadConceptsBySlug: () => Promise<Map<string, Concept>> = async () => {
 const conceptsBySlug = await loadConceptsBySlug();
 
 const solution = Astro.props;
-const { Content } = await solution.render();
+const { Content } = await render({ id: Astro.params.slug, ...solution });
 const { data: { year, day, title, pub_date, concepts } } = Astro.props;
 
 const solutionTitle = `Advent of Code ${year} Day ${day}: ${title}`

@@ -2,17 +2,18 @@
 import { getConcepts } from "../../utils/collections";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Layout from "../../layouts/Layout.astro";
+import { render } from "astro:content";
 
 export const getStaticPaths = async () => {
   const concepts = await getConcepts();
-  return concepts.map(({ slug, ...concept }) => ({
-    params: { slug },
+  return concepts.map(({ id, ...concept }) => ({
+    params: { slug: id },
     props: concept,
   }));
 };
 
 const concept = Astro.props;
-const { Content } = await concept.render();
+const { Content } = await render({ id: Astro.params.slug, ...concept });
 const { data: { title, category } } = Astro.props;
 
 const conceptTitle = `Concept: ${title}`;
