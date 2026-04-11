@@ -3,7 +3,7 @@ year: 2024
 day: 1
 title: "Historian Hysteria"
 slug: 2024/day/1
-# pub_date: "2026-01-01"
+pub_date: "2026-04-10"
 # concepts: []
 ---
 ## Part 1
