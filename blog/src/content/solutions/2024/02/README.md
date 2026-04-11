@@ -1,7 +1,7 @@
 ---
 year: 2024
 day: 2
-title: "Title"
+title: "Red-Nosed Reports"
 slug: 2024/day/2
 pub_date: "2026-04-11"
 # concepts: []
