@@ -67,7 +67,7 @@ Now each pair of numbers from the left and right lists can be iterated through
 with `zip`. Adding up the distances (i.e. absolute differences) for all pairs
 will give us our answer.
 
-```py title="2024\day01\solution.py"
+```py title="2024\day01\solution.py" ins={5}
 class Solution(StrSplitSolution):
     def part_1(self) -> int:
         pairs = [tuple(int(n) for n in line.split()) for line in self.input]
