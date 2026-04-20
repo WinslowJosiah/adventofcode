@@ -121,10 +121,9 @@ libraries ended up writing [their own linear equation solver](https://github.com
 
 Some AoC puzzles require heavy use of algebra,[^aoc-algebra] and I was ready to
 write this day's puzzle off as "the algebra puzzle" -- that is, until I saw
-[an illuminating post](https://reddit.com/comments/1pk87hl) by `u/tenthmascot`
-in the Advent of Code subreddit. In it, they presented a solution approach that
-uses no linear algebra at all -- and in all honesty, I'm surprised I didn't
-think of it myself.[^didnt-think-of-it-myself]
+an illuminating post by `u/tenthmascot` in the Advent of Code subreddit. In it,
+they presented a solution approach that uses no linear algebra at all -- and in
+all honesty, I'm surprised I didn't think of it myself.[^didnt-think-of-it-myself]
 
 [^aoc-algebra]: For a good example of this, see [2023 Day 24](/solutions/2023/day/24).
 
