@@ -93,7 +93,7 @@ he ["always hated most"](https://www.artima.com/weblogs/viewpost.jsp?thread=9819
 and he considered removing it in Python 3 before it was relegated to the
 `functools` module.
 
-Combined with various functions from the [operator](https://docs.python.org/3/library/operator.html)
+Combined with various functions from the [`operator`](https://docs.python.org/3/library/operator.html)
 module, this can be used to get the sum or product of a series of numbers, based
 on which operator function we pass to it.[^sum-and-math-prod]
 
