@@ -85,7 +85,7 @@ class UnionFind[T]:
         # Make root1 the new root and update its stored size
         self.parent[root2] = root1
         self.size[root1] += self.size[root2]
-        # root2 is no longer a root, so it shouldn't store have a size
+        # root2 is no longer a root, so it shouldn't store a size
         del self.size[root2]
 
     @property
