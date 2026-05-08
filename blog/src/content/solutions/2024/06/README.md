@@ -340,8 +340,28 @@ class Solution(StrSplitSolution):
 
 Finally, we can implement the actual speedup. In Part 2, instead of starting
 each gallivant from the guard's starting position, we can start from the path
-position _just_ before the newly placed obstacle. We can find this position
-using a `next()` expression involving our path list.
+position _just_ before the guard would hit the newly placed obstacle; after all,
+the path will be identical up to that point. (_This_ is why we saved the initial
+path: to avoid recalculating it each time.)
+
+The way we can find this path position is by using `next`; we'll be looking for
+the "next" path position where the guard would overlap the obstacle if she
+stepped forward.[^cant-just-teleport]
+
+[^cant-just-teleport]: You'd think that we could simply teleport the guard one
+tile backwards from the obstacle, but that actually doesn't work. In some
+scenarios, the guard may run into the newly placed obstacle at an _earlier_
+point.
+
+    For example, if an obstacle is placed at `O` below, the guard will not run
+    into it at position `A`, but at position `B`:
+
+        .#.....|......
+        .+----BO----+#
+        .|.....A....|.
+        .|.....|....|.
+        .|....#+----+.
+        .^..........#.
 
 ```py title="2024\day06\solution.py" ins={14-18} ins="blocked_path" ins=/, (blocked_guard)/
 ...
