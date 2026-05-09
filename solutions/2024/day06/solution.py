@@ -1,6 +1,6 @@
 # https://adventofcode.com/2024/day/6
 
-from ...base import StrSplitSolution, answer
+from ...base import StrSplitSolution, answer, slow
 from ...utils.grids import Grid, Direction, Position, parse_grid
 
 
@@ -31,6 +31,7 @@ class Solution(StrSplitSolution):
     _day = 6
 
     @answer((4890, 1995))
+    @slow
     def solve(self) -> tuple[int, int]:
         grid = parse_grid(self.input)
         guard = Position(
