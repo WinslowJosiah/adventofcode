@@ -79,7 +79,7 @@ There are a few ways to represent decimal numbers in Python: as a `float`, as a
 and as a [`fractions.Fraction`](https://docs.python.org/3/library/fractions.html).
 Each have their own strengths and weaknesses:
 
-- A `float` is are stored as a [floating-point number](https://en.wikipedia.org/wiki/Floating-point_arithmetic)
+- A `float` is stored as a [floating-point number](https://en.wikipedia.org/wiki/Floating-point_arithmetic)
 -- specifically ["double-precision"](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
 -- and calculations with them can be done very fast. However, floating-point
 numbers have a limited precision, which can make [some calculations](https://0.30000000000000004.com)
