@@ -75,7 +75,7 @@ because I at least know it will be a rational number.)
 
 :::tip
 There are a few ways to represent decimal numbers in Python: as a `float`, as a
-[`decimal.Decimal`](https://docs.python.org/3/library/decimal.html#decimal.Decimal).
+[`decimal.Decimal`](https://docs.python.org/3/library/decimal.html#decimal.Decimal),
 and as a [`fractions.Fraction`](https://docs.python.org/3/library/fractions.html).
 Each have their own strengths and weaknesses:
 
