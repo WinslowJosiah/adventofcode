@@ -35,7 +35,7 @@ class Hailstone:
     @classmethod
     def parse(cls, line: str) -> Hailstone:
         position, velocity = line.split(" @ ")
-        return Hailstone(*parse_3d_point(position), *parse_3d_point(velocity))
+        return cls(*parse_3d_point(position), *parse_3d_point(velocity))
     ...
 ```
 
