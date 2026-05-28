@@ -234,7 +234,7 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
                 # No other path to here has been optimal yet
                 prev_states[next_state].clear()
 
-            # If this isn't a worse-distance way to get here
+            # If this isn't a higher-distance way to get here
             if next_distance <= prev_distance:
                 # The state we got here from is on an optimal path
                 prev_states[next_state].add(state)
