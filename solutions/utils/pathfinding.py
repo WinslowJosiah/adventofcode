@@ -260,13 +260,11 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
             raise ValueError(f"cycle detected at state: {state}")
 
         if state in start_states_set:
-            path_counts[state] = 1
-            nodes_on_paths.add(state.node)
-            return 1
-
-        in_progress.add(state)
-        total = sum(map(count_paths_to, prev_states[state]))
-        in_progress.remove(state)
+            total = 1
+        else:
+            in_progress.add(state)
+            total = sum(map(count_paths_to, prev_states[state]))
+            in_progress.remove(state)
 
         path_counts[state] = total
         nodes_on_paths.add(state.node)
