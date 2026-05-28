@@ -96,11 +96,29 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
 
 First, we assign a distance of 0 to all starting states, and a distance of
 infinity to all other states. We can do this with a `defaultdict` where items
-have a default value of [`math.inf`](https://docs.python.org/3/library/math.html#math.inf).
+have a default value of [`math.inf`](https://docs.python.org/3/library/math.html#math.inf).[^infinity-type-hint]
 Because the `defaultdict` constructor takes a _callable_, not a value, we have
-to provide a function that returns infinity, which we can do succinctly with the
-[`lambda`](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)
-keyword, like so:
+to provide a function that _returns_ infinity, which we can do succinctly with
+the [`lambda`](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)
+keyword like so:
+
+[^infinity-type-hint]: The only flaw with making `math.inf` the default value is
+that it forces the type of each distance value to be compatible with `float`,
+even if the only distance values you use are `int`s. At present, it's not
+possible to use floats in ["literal" types](https://typing.python.org/en/latest/spec/literal.html),
+so the type hint here can't get any more specific than `int | float`.
+
+    This actually bothered me enough to create a special `_PositiveInfinity`
+    type, which acts like infinity in comparisons and does nothing else. The
+    [definition of `_PositiveInfinity`](https://github.com/WinslowJosiah/adventofcode/blob/445df037ff2652523a6bdd6252ffb6c40a679a17/solutions/utils/pathfinding.py#L12-L49)
+    is not _too_ [complex](https://pep20.org/#complex) (even if there's more
+    boilerplate than I'd like), and the resulting type signature of
+    `int | _PositiveInfinity` is more [readable](https://pep20.org/#readability)
+    in my opinion.
+
+    (I also considered using some sentinel value like `None` to represent
+    infinity, but the fact that `math.inf` or `_PositiveInfinity` "just works"
+    in comparisons makes it more [simple](https://pep20.org/#simple) not to.)
 
 ```py
 >>> from collections import defaultdict
