@@ -109,7 +109,7 @@ tell us to ignore features of the input for Part 1... what's up with those
 
 Turns out the joltage levels function as counters, and each button will
 increment some of those counters. This had me somewhat worried; if Part 1
-reminded me of Lights Out, Part 2 reminded me of [the linear algebra](https://www.youtube.com/watch?v=0fHkKcy0x_U)
+reminded me of Lights Out, Part 2 reminded me of [the linear algebra](https://youtu.be/0fHkKcy0x_U)
 you would need to do to systematically solve that game.
 
 Many in [the Reddit solution thread](https://reddit.com/comments/1pity70) were
