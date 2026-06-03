@@ -143,7 +143,7 @@ a class made to assist in topological sorting. (In my opinion, _this_ is the
 by David Brownman.
 
 However, I saw one approach taken by a few people (including the ever-clever
-[`u/4HbQ` on Reddit](https://www.reddit.com/r/adventofcode/comments/1h71eyz/comment/m0i09b0/))
+[`u/4HbQ` on Reddit](https://reddit.com/r/adventofcode/comments/1h71eyz/comment/m0i09b0/))
 which I found interesting, and which I probably would've used myself if I knew
 about it back in 2024. So I'll be explaining that approach instead -- especially
 because I will likely never have an excuse to explain it again.
