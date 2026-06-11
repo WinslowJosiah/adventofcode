@@ -62,8 +62,8 @@ pairs of antennas, and calculating where their "antinode" would be in only one
 direction: towards the second antenna.
 
 :::tip
-[`itertools.combinations`](https://docs.python.org/3/library/itertools.html#itertools.combinations)
-and [`itertools.permutations`](https://docs.python.org/3/library/itertools.html#itertools.permutations)
+[`itertools.permutations`](https://docs.python.org/3/library/itertools.html#itertools.permutations)
+and [`itertools.combinations`](https://docs.python.org/3/library/itertools.html#itertools.combinations)
 are two standard-library functions that give you a selection of items from a
 larger collection. The main difference between them is in how that selection of
 items is ordered:

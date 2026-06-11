@@ -187,9 +187,9 @@ more [readable](https://pep20.org/#readability).
 We were a bit lucky that we could calculate each region's perimeter one tile at
 a time; as far as I know, we can't count the number of sides this way (without
 some rather complex bookkeeping). But luckily, any polygon has exactly as many
-sides as corners -- and we _can_ count the number of _corners_ one tile at a
-time. So let's turn this into a unified `solve` function, and mentally prepare
-to count each region's corners.
+sides as corners, and we _can_ count the number of _corners_ one tile at a time.
+So let's turn this into a unified `solve` function, and mentally prepare to
+count each region's corners.
 
 ```py title="2024\day12\solution.py" ins={8-9,19} {15-16} ins="solve" ins="tuple[int, int]" ins=/(perimeter_)price(, side_price)/ ins=", 0" ins=", num_corners" ins=/(perimeter_)price \\+=/
 ...

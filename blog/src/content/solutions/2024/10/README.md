@@ -77,8 +77,8 @@ this case, it doesn't matter what order we process the paths we walk down, so it
 doesn't matter what data structure we use.
 
 1. Pop a grid point from the queue.
-2. If this point is a valid endpoint, add it to a endpoint set and continue. (We
-want it to be a `set` because we're counting _unique_ endpoints.)
+2. If this point is a valid endpoint, add it to an endpoint set and continue.
+(We want it to be a `set` because we're counting _unique_ endpoints.)
 3. Add all valid _next_ points from here to the queue.[^retracing-steps]
 
 [^retracing-steps]: In other contexts, it would also make sense to ensure we

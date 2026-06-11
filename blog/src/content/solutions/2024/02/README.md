@@ -43,8 +43,8 @@ especially useful if `b` is a complicated expression.
 
 This lets us check whether a report is safe, but only if it happens to be
 _increasing_. But if the report is _decreasing_, it looks just like an
-increasing report, so we can reverse it and check if _that_ is a safe increasing
-report.
+increasing report in reverse, so we can reverse it and check if _that_ is a safe
+increasing report.
 
 ```py title="2024\day02\solution.py"
 def is_safe(report: Sequence[int]) -> bool:

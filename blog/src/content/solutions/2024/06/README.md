@@ -136,7 +136,7 @@ something to keep in mind.
 
 ## Part 2
 
-As it turns out, we _want_ the guard to get into an infinite loop -- and we'll
+As it turns out, we _want_ the guard to get into an infinite loop, and we'll
 accomplish this by placing some obstacle somewhere in the grid. But before we do
 that, we'll have to ensure that our `track_guard` function can handle this
 scenario.

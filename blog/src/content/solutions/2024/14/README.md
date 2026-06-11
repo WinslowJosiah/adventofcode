@@ -396,11 +396,11 @@ b'x\x9cs,\xca/\xcdKQ(\xc9HU(\xcf/\xcaI\xd1QHD\x13\xe1r\x1c\x81J\x00\x14\x88d\xc7
 
 To efficiently get the `n` smallest items according to some metric, we can use
 the [`heapq.nsmallest`](https://docs.python.org/3/library/heapq.html#heapq.nsmallest)
-function with an argument for the sorting `key` -- in this case, we'll want the
-length of the grid string after using `compress` on it. So I'll save the grid
-string at each simulated second in a `dict`, and I'll get the 5 smallest `items`
--- pairs of each second value and grid string[^second-value-is-first] -- by that
-metric and print them.
+function with an argument for the sorting `key`; in this case, the key will be
+the length of the grid string after using `compress` on it. So I'll save the
+grid string at each simulated second in a `dict`, and I'll get the 5 smallest
+`items` -- pairs of each second value and grid string[^second-value-is-first] --
+by that metric and print them.
 
 [^second-value-is-first]: Amusingly, the "second value" is _first_. (In other
 words, the number of elapsed seconds is the first item of the pair.)
