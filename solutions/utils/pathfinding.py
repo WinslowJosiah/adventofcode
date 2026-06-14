@@ -73,13 +73,10 @@ class PathResult[Node, State: PathState[Node]]:  # pyright: ignore[reportGeneral
     ----------
     distance : int
         The shortest path distance.
-    num_paths : int
-        Count of all shortest paths.
     paths : iterator of list of state
         Iterator yielding each shortest path as a list of states.
     """
     distance: int
-    num_paths: int
     paths: Iterator[list[State]]
 
 
@@ -135,7 +132,6 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
     PathResult
         Contains:
             - distance: int, the shortest path distance
-            - num_paths: int, count of all shortest paths
             - paths: iterator yielding each shortest path as a list of
             states
 
@@ -245,35 +241,7 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
             f"no path exists from {start_node!r} to {end_node!r}"
         )
 
-    # Count paths and collect nodes by traversing prev_states in reverse
-    path_counts: dict[State, int] = {}
-    in_progress: set[Node] = set()
-
-    def count_paths_to(state: State) -> int:
-        """Count paths from any start state to `state`."""
-        if state in path_counts:
-            return path_counts[state]
-
-        # HACK There could be a 0-distance cycle, which would lead to
-        # infinite recursion while counting paths. So if we're asked to
-        # count paths to a state we're already in the process of
-        # counting paths to, we raise an error.
-        if state in in_progress:
-            raise ValueError(f"cycle detected at state: {state}")
-
-        if state in start_states_set:
-            total = 1
-        else:
-            in_progress.add(state)
-            total = sum(map(count_paths_to, prev_states[state]))
-            in_progress.remove(state)
-
-        path_counts[state] = total
-        return total
-
-    num_paths = sum(map(count_paths_to, end_states))
-
-    # Generate actual paths lazily
+    # Generate all paths lazily
     def paths_ending_at(state: State) -> Iterator[list[State]]:
         """Generate all paths ending at `state`."""
         if state in start_states_set:
@@ -287,7 +255,6 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
 
     return PathResult(
         distance=shortest_distance,
-        num_paths=num_paths,
         paths=all_paths,
     )
 
