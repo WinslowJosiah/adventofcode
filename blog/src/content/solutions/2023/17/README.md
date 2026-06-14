@@ -222,6 +222,13 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
     return PathResult(distance=shortest_distance)
 ```
 
+:::tip
+In the case of no path being found at all, I raise a custom exception I call
+`NoPathError`. It doesn't take much to create a custom exception -- just create
+a class that inherits from the `Exception` class -- and it allows this specific
+case to be caught and handled by the user.
+:::
+
 This was a bit of a long tangent, but now we have a function for finding the
 shortest path in a weighted graph! We can add some more helpful features later,
 but we don't need them yet; this much is enough to solve the puzzle.
