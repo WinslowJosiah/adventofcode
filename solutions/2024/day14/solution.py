@@ -63,17 +63,21 @@ class Solution(StrSplitSolution):
             grid_str = robots_to_grid_str(robots, width, height)
 
             if second == 100:
-                print("Robots after 100 seconds:")
-                print(grid_str)
-                print()
+                self.debug(
+                    "Robots after 100 seconds:",
+                    grid_str,
+                    trailing_newline=True,
+                )
                 part_1 = safety_factor(robots, width, height)
 
             # HACK Because we know the Christmas tree has a solid border
             # around it, we can simply check whether this border exists.
             if "1" * 31 in grid_str:
-                print(f"Christmas tree found after {second} seconds:")
-                print(grid_str)
-                print()
+                self.debug(
+                    f"Christmas tree found after {second} seconds:",
+                    grid_str,
+                    trailing_newline=True,
+                )
                 part_2 = second
 
             if part_1 is not None and part_2 is not None:
