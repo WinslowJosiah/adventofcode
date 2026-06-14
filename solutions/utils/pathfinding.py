@@ -321,6 +321,7 @@ def find_reachable_nodes[Node, State: PathState[Node]](  # pyright: ignore[repor
 
 
 __all__ = [
+    "NoPathError",
     "PathResult",
     "PathState",
     "find_reachable_nodes",
