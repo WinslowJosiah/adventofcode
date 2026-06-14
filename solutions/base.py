@@ -16,6 +16,7 @@ class AocException(Exception):
     Custom exception class for issues related to creating/running
     solutions.
     """
+    pass
 
 
 class InputTypes(Enum):
