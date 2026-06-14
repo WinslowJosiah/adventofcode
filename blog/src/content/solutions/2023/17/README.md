@@ -36,7 +36,7 @@ class PathState[Node](Hashable, Protocol):
     def node(self) -> Node: ...
 
 @dataclass(frozen=True)
-class PathResult:
+class PathResult[Node, State: PathState[Node]]:  # pyright: ignore[reportGeneralTypeIssues]
     """
     Result of `find_shortest_paths`.
     """
