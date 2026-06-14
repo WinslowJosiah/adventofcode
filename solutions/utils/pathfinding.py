@@ -75,14 +75,11 @@ class PathResult[Node, State: PathState[Node]]:  # pyright: ignore[reportGeneral
         The shortest path distance.
     num_paths : int
         Count of all shortest paths.
-    all_nodes : set of node
-        All unique nodes across all shortest paths.
     paths : iterator of list of state
         Iterator yielding each shortest path as a list of states.
     """
     distance: int
     num_paths: int
-    all_nodes: set[Node]
     paths: Iterator[list[State]]
 
 
@@ -139,8 +136,6 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
         Contains:
             - distance: int, the shortest path distance
             - num_paths: int, count of all shortest paths
-            - all_nodes: set of node, all unique nodes across all
-            shortest paths
             - paths: iterator yielding each shortest path as a list of
             states
 
@@ -252,7 +247,6 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
 
     # Count paths and collect nodes by traversing prev_states in reverse
     path_counts: dict[State, int] = {}
-    nodes_on_paths: set[Node] = set()
     in_progress: set[Node] = set()
 
     def count_paths_to(state: State) -> int:
@@ -275,7 +269,6 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
             in_progress.remove(state)
 
         path_counts[state] = total
-        nodes_on_paths.add(state.node)
         return total
 
     num_paths = sum(map(count_paths_to, end_states))
@@ -295,7 +288,6 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
     return PathResult(
         distance=shortest_distance,
         num_paths=num_paths,
-        all_nodes=nodes_on_paths,
         paths=all_paths,
     )
 
