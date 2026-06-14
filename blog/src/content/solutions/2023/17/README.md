@@ -180,6 +180,11 @@ the ending state.
 ```py title="utils\pathfinding.py" ins=", heappop, heappush"
 from heapq import heapify, heappop, heappush
 
+# Custom exception: no path exists
+class NoPathError(Exception):
+    """No path exists from the start states to the end node."""
+    pass
+
 ...
 
 def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[reportGeneralTypeIssues]
@@ -210,7 +215,7 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
                 heappush(priority_queue, (next_distance, next_state))
 
     if shortest_distance is None:
-        raise ValueError("no path exists")
+        raise NoPathError(f"no path exists to {end_node!r}")
 
     return PathResult(distance=shortest_distance)
 ```
