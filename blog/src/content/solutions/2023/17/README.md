@@ -215,7 +215,9 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
                 heappush(priority_queue, (next_distance, next_state))
 
     if shortest_distance is None:
-        raise NoPathError(f"no path exists to {end_node!r}")
+        raise NoPathError(
+            f"no path exists from {start_node!r} to {end_node!r}"
+        )
 
     return PathResult(distance=shortest_distance)
 ```

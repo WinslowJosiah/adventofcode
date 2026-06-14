@@ -60,12 +60,6 @@ class PathState[Node](Hashable, Protocol):
     def node(self) -> Node: ...
 
 
-# Custom exception: no path exists
-class NoPathError(Exception):
-    """No path exists from the start states to the end node."""
-    pass
-
-
 # HACK The type checker complains when I constrain the generic typevar
 # State by PathState[Node], since Node is also a generic typevar. The
 # only thing I can do about this seems to be to ignore it. (This will
@@ -90,6 +84,12 @@ class PathResult[Node, State: PathState[Node]]:  # pyright: ignore[reportGeneral
     num_paths: int
     all_nodes: set[Node]
     paths: Iterator[list[State]]
+
+
+# Custom exception: no path exists
+class NoPathError(Exception):
+    """No path exists from the start states to the end node."""
+    pass
 
 
 def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[reportGeneralTypeIssues]
@@ -246,7 +246,9 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
                 prev_states[next_state].add(state)
 
     if shortest_distance is None:
-        raise NoPathError(f"no path exists to {end_node!r}")
+        raise NoPathError(
+            f"no path exists from {start_node!r} to {end_node!r}"
+        )
 
     # Count paths and collect nodes by traversing prev_states in reverse
     path_counts: dict[State, int] = {}
