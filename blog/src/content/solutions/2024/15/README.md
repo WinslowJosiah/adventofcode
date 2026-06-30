@@ -3,7 +3,7 @@ year: 2024
 day: 15
 title: "Warehouse Woes"
 slug: 2024/day/15
-# pub_date: "2026-01-01"
+pub_date: "2026-06-29"
 # concepts: []
 ---
 ## Part 1
