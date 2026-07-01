@@ -171,9 +171,9 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
 For the main loop of the algorithm, we simply loop through the items in the
 priority queue, using `heapq.heappop` to take the shortest-distance item from
 the queue, and `heapq.heappush` to push an item onto the queue if we've found a
-shorter-distance way to get there. This continues until either an ending state
-is found or all queue items have been exhausted; we then return the distance to
-the ending state.
+lower-distance way to get there. This continues until either an ending state is
+found or all queue items have been exhausted; we then return the distance to the
+ending state.
 
 ```py title="utils\pathfinding.py" ins=", heappop, heappush"
 from heapq import heapify, heappop, heappush
@@ -199,13 +199,14 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
             shortest_distance = distance
             break
 
-        # Skip if we've already found this state with a better distance
+        # Skip if we've already found this state with a lower distance
         if distances[state] < distance:
             continue
 
         for next_state, distance_to_next_state in get_transitions(state):
             prev_distance = distances[next_state]
             next_distance = distance + distance_to_next_state
+
             # If this is a lower-distance way to get here
             if next_distance < prev_distance:
                 # Update distances and continue searching from here
@@ -390,7 +391,7 @@ Modifying the `find_shortest_paths` function to use an optional heuristic
 doesn't require a lot of changes; all we need to do is calculate the priority of
 an item whenever we add it to the priority queue.
 
-```py title="utils/pathfinding.py" ins={9,15-18,38} ins="get_priority(0, s.node), " ins="_, " ins="priority, "
+```py title="utils/pathfinding.py" ins={9,15-18,39} ins="get_priority(0, s.node), " ins="_, " ins="priority, "
 # pyright: reportArgumentType=false
 ...
 
@@ -424,6 +425,7 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
         for next_state, distance_to_next_state in get_transitions(state):
             prev_distance = distances[next_state]
             next_distance = distance + distance_to_next_state
+
             # If this is a lower-distance way to get here
             if next_distance < prev_distance:
                 # Update distances and continue searching from here

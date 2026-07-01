@@ -210,7 +210,7 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
             end_states.append(state)
             continue
 
-        # Skip if we've already found this state with a better distance
+        # Skip if we've already found this state with a lower distance
         if distances[state] < distance:
             continue
 
