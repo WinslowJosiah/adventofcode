@@ -168,7 +168,6 @@ def find_shortest_paths[Node, State: PathState[Node]](  # pyright: ignore[report
     start_states_set: set[State] = set(start_states)
     if not start_states_set:
         raise ValueError("start_states must be non-empty")
-
     # Verify all start states have the same node
     start_node = next(iter(start_states_set)).node
     if not all(s.node == start_node for s in start_states_set):
