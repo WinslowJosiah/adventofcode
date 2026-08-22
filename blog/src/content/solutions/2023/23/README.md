@@ -4,7 +4,7 @@ day: 23
 title: "A Long Walk"
 slug: 2023/day/23
 pub_date: "2025-11-19"
-# concepts: []
+# concepts: [recursion]
 ---
 ## Part 1
 
