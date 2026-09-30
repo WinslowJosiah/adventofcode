@@ -55,7 +55,7 @@ the minimum cut of the graph.
     was usually true, it was untrue often enough that I didn't feel comfortable
     using it.
 
-:::image-figure[The marked edge is contracted into a single node. :br :small[_(Image from the [WikiMedia Commons](https://commons.wikimedia.org/wiki/File:Edge_contraction_in_a_multigraph.svg), licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en))._]]
+:::image-figure[The marked edge is contracted into a single node. :br :small[_(Image from the [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Edge_contraction_in_a_multigraph.svg), licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en))._]]
 ![An edge in a multigraph is contracted. Self-loops are eliminated.](edge-contraction.png)
 :::
 
@@ -65,7 +65,7 @@ choosing edges and contracting them; eventually, only two nodes will be left in
 the graph, and the edges that connect them will (probably) be part of the
 minimum cut.
 
-:::image-figure[Karger's algorithm successfully finds the minimum cut of this graph. :br :small[_(Image from the [WikiMedia Commons](https://commons.wikimedia.org/wiki/File:Single_run_of_Karger%E2%80%99s_Mincut_algorithm.svg), modified, and licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en))._]]
+:::image-figure[Karger's algorithm successfully finds the minimum cut of this graph. :br :small[_(Image from the [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Single_run_of_Karger%E2%80%99s_Mincut_algorithm.svg), modified, and licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en))._]]
 ![A single (successful) run of Karger's algorithm on a ten-node graph. The graph consists of two interconnected groups of five nodes each, marked with white nodes and red nodes respectively, and three edges that connect the groups. A random edge is contracted at each step until only a white node and a red node remain, with three edges between them.](kargers-algorithm.png)
 :::
 
