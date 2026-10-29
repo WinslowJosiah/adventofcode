@@ -180,8 +180,9 @@ Let's write a function for this; we can have it iterate through all points
 within a given "radius" of a given center point. My custom `grids` module
 includes a helpful `add_points` function to add `GridPoint`s (i.e. tile
 locations) together, so we can just choose `dx`/`dy` pairs where the distance
-from `(0, 0)` -- that is, `abs(dx) + abs(dy)` -- is at most our radius. Here's
-an unfinished sketch of what the completed function would look like.
+from `(0, 0)` -- that is, `abs(dx) + abs(dy)` -- is at most our radius, and add
+those `dx`/`dy` pairs to our center point. Here's an unfinished sketch of what
+this function would look like.
 
 ```py title="2024\day20\solution.py" "..."
 from collections.abc import Iterator
