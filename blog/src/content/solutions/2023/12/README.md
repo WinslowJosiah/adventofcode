@@ -138,7 +138,8 @@ the number of solutions for any Picross row.
 ## Part 2
 
 Preparing our `solve_line` function to run Part 2 isn't too hard. (It's made
-easier by the fact that we can literally multiply sequences to repeat them!)
+easier by the fact that we can literally multiply sequences by integers to
+repeat them!)
 
 ```py title="2023\day12\solution.py" ins=", with_multiplier: bool = False" ins={4-6,13-17}
 def solve_line(line: str, with_multiplier: bool = False) -> int:
