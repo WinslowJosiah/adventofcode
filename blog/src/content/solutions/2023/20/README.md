@@ -415,7 +415,6 @@ class Computer:
 ```
 
 :::caution
-
 By returning both the pulse `Counter` and tracked-high-pulses `set`, we've
 broken our Part 1 solution which expects only the `Counter`. But that's nothing
 that can't be fixed by indexing the result.
